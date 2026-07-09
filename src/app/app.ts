@@ -1,13 +1,14 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { SideBar } from '../shared/components/side-bar/side-bar';
 import { UserDto } from '../shared/models/UserDto';
 import { UserType } from '../shared/models/UserType.enum';
 import { Login } from "./user/login/login";
 import { Registration } from './user/registration/registration';
+import { Landing } from "./user/landing/landing";
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SideBar],
+  imports: [RouterOutlet, SideBar, Landing, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -21,7 +22,7 @@ export class App implements OnInit{
 ngOnInit(): void {
  console.log('Welcome to note app')
 }
-
+user={}
 // users:UserDto[]=[
 //   {
 //     id:1,

@@ -9,12 +9,11 @@ import { SideBarItem } from './side-bar-item/side-bar-item';
 })
 export class SideBar {
 
-routes=[
-
-  { path: ['/'], name: 'Home' },
-    { path: ['/', 'notes'], name: 'Notes' },
-    { path: ['/', 'user'], name: 'User' },
-]
+routes = [
+  { path: ['/home/'], name: 'Home' },
+  { path: ['/home/notes'], name: 'Notes' },
+  { path: ['/home/user'], name: 'User' }
+];
 
 
 }

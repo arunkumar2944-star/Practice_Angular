@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../config/Environment';
 import { UserDto } from '../models/UserDto';
+import { User } from '../../app/user/user';
 @Injectable({
   providedIn: 'root'
 })
@@ -29,4 +30,8 @@ export class UserService {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
+  loginUser(User:any):Observable<any>{
+    console.log(User, `{this.apiUrl}/login`)
+    return this.http.post<any>(`${this.apiUrl}/login`, User);
+  }
 }

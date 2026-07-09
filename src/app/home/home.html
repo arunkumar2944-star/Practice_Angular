@@ -1,1 +1,134 @@
-<p>home works!</p>
+<!-- <nav class="fixed h-17 top-0 w-full ml-0 z-50">
+  <ul
+    class="h-17 flex items-center w-full  px-5 py-2 text-emerald-50 bg-gray-600 justify-between shadow shadow-gray-400">
+    <li class="flex gap-2  items-center">
+      <img src="/BDicon.png" alt="Logo" class="w-8 h-8" />
+      <h1 class="text-xl font-semibold ">My Notes</h1>
+    </li>
+    <li class="text-xl font-semibold">Welcome Arun</li>
+
+  </ul>
+</nav>
+<section class="mt-16 flex w-full ml-0">
+
+  <nav class="w-3xs py-5 min-w-3xs sticky top-16 h-[calc(100vh-4rem)]  text-emerald-50 bg-gray-600">
+    <app-side-bar></app-side-bar>
+  </nav>
+  <main class="p-5 w-full">
+    <router-outlet>
+    </router-outlet>
+  </main>
+</section> -->
+
+
+
+<!-- ================= NAVBAR ================= -->
+<header
+    class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 shadow-sm z-50">
+
+    <div class="h-full flex items-center justify-between px-6">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+
+            <img
+                src="/BDicon.png"
+                class="w-10 h-10 rounded-lg shadow"
+                alt="Logo">
+
+            <div>
+                <h1 class="text-xl font-bold text-gray-800">
+                    My Notes
+                </h1>
+
+                <p class="text-xs text-gray-500">
+                    Personal Workspace
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="flex items-center gap-6">
+
+            <!-- Search -->
+            <div class="hidden md:block">
+
+                <input
+                    type="text"
+                    placeholder="Search notes..."
+                    class="w-72 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            </div>
+
+            <!-- Notification -->
+            <button
+                class="relative text-gray-600 hover:text-blue-600 cursor-pointer">
+
+                🔔
+
+                <span
+                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs h-5 w-5 flex items-center justify-center">
+                    3
+                </span>
+
+            </button>
+
+            <!-- User -->
+            <div class="flex items-center gap-3 cursor-pointer">
+
+                <img
+                    src="https://ui-avatars.com/api/?name=Arun"
+                    class="w-10 h-10 rounded-full">
+
+                <div class="hidden md:block">
+
+                    <h3 class="font-semibold text-gray-800">
+                        Arun
+                    </h3>
+
+                    <p class="text-sm text-gray-500">
+                        Administrator
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ================= MAIN LAYOUT ================= -->
+
+<div class="flex pt-16 bg-gray-100 min-h-screen">
+
+    <!-- Sidebar -->
+
+    <aside
+        class="w-72 bg-gray-900 text-gray-200 shadow-lg">
+
+        <div class="p-6 border-b border-gray-700">
+
+            <h2 class="font-semibold text-lg">
+                Navigation
+            </h2>
+
+        </div>
+
+        <app-side-bar></app-side-bar>
+
+    </aside>
+
+    <!-- Content -->
+
+    <main class="flex-1 p-8 overflow-auto">
+
+        <router-outlet></router-outlet>
+
+    </main>
+
+</div>
+

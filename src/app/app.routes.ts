@@ -5,7 +5,7 @@ import{Login} from './user/login/login';
 import { Notes } from './notes/notes';
 import { Registration } from './user/registration/registration';
 import { Landing } from './user/landing/landing';
-
+import { HOME_ROUTES } from './home/home.routes';
 export const routes: Routes = [
 
     
@@ -15,29 +15,24 @@ export const routes: Routes = [
     {
         path: "login", component: Login
     },
-    {
-        path: "user", component: User
-    },
+    
     
     {
         path: "register", component: Registration,
         
     },
-    {
-        path: "home", component: Home,
+    // {
+    //     path: "home", component: Home,
         
-    },
-    
+    // },
     {
-        path: "notes", component: Notes,
-        
-    },
-    
-
+    path: 'home',
+    children: HOME_ROUTES
+  },
 
 
     {
-        path: "**", component: Home //wildcard entry should be in last
+        path: "**", component: Landing //wildcard entry should be in last
     }
 
 

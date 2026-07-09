@@ -2,6 +2,7 @@ import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/co
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../shared/services/userService';
 import { UserDto } from '../../../shared/models/UserDto';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration',
   imports: [FormsModule, ReactiveFormsModule],
@@ -13,6 +14,7 @@ export class Registration {
 
   fb = inject(FormBuilder)
   userService = inject(UserService)
+  router=inject(Router)
   showPassword = false;
   showConfirmPassword = false;
 
@@ -34,20 +36,22 @@ export class Registration {
       age: this.userForm.controls.age.value ?? 0,
       gender: this.userForm.controls.gender.value ?? '',
       email: this.userForm.controls.email.value ?? '',
+
       password: this.userForm.controls.password.value ?? '',
       phoneNo: Number(this.userForm.controls.phoneNo.value ?? 0)
-
 
     }
     this.userService.createUser(User).subscribe({
       next: (response) => {
-        console.log('User created successfully', response);
         alert('Registration Successful');
-      },
+         this.router.navigate(['/login']);
+        
+      },  
       error: (error) => {
         console.error('Registration failed', error);
         alert('Registration Failed');
       }
+      
     });
   }
 }
