@@ -1,0 +1,53 @@
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../../shared/services/userService';
+import { UserDto } from '../../../shared/models/UserDto';
+@Component({
+  selector: 'app-registration',
+  imports: [FormsModule, ReactiveFormsModule],
+  templateUrl: './registration.html',
+  styleUrl: './registration.css',
+})
+export class Registration {
+
+
+  fb = inject(FormBuilder)
+  userService = inject(UserService)
+  showPassword = false;
+  showConfirmPassword = false;
+
+  userForm = this.fb.group({
+    name: ['', Validators.required],
+    age: [null, Validators.required],
+    gender: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    phoneNo: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', Validators.required]
+  });
+
+  register() {
+    // this.userService.createUser()
+    const User: UserDto = {
+      id: '',
+      name: this.userForm.controls.name.value ?? '',
+      age: this.userForm.controls.age.value ?? 0,
+      gender: this.userForm.controls.gender.value ?? '',
+      email: this.userForm.controls.email.value ?? '',
+      password: this.userForm.controls.password.value ?? '',
+      phoneNo: Number(this.userForm.controls.phoneNo.value ?? 0)
+
+
+    }
+    this.userService.createUser(User).subscribe({
+      next: (response) => {
+        console.log('User created successfully', response);
+        alert('Registration Successful');
+      },
+      error: (error) => {
+        console.error('Registration failed', error);
+        alert('Registration Failed');
+      }
+    });
+  }
+}

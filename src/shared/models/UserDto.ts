@@ -1,11 +1,17 @@
 import { UserType } from "./UserType.enum";
 
 export interface UserDto{
-    id:number|null,
+    id?:string|null,
     name:string,
     age:number,
     gender:string,
-    userID:string,
+    email:string,
     password:string,
-    usertype:UserType
+    phoneNo:number,
+    usertype?:UserType|UserType.Admin,
+    createdBy?:number|0,
+    createdAt?:Date,
+    updatedBy?:number|0,
+    updatedAt?:Date,
+    isActive?:boolean|true
 }

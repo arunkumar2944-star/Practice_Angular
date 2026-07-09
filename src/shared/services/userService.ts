@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../config/Environment';
+import { UserDto } from '../models/UserDto';
 @Injectable({
   providedIn: 'root'
 })
-export class User {
+export class UserService {
 
   private apiUrl=environment.apiUrl;
   constructor(private http: HttpClient) {}
@@ -15,7 +16,8 @@ export class User {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  createUser(User: any): Observable<any> {
+  createUser(User: UserDto): Observable<any> {
+    console.log(this.apiUrl,User)
     return this.http.post<any>(this.apiUrl, User);
   }
 

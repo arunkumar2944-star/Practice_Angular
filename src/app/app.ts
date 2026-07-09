@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { SideBar } from '../shared/components/side-bar/side-bar';
 import { UserDto } from '../shared/models/UserDto';
 import { UserType } from '../shared/models/UserType.enum';
-
+import { Login } from "./user/login/login";
+import { Registration } from './user/registration/registration';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SideBar],
+  imports: [RouterOutlet, SideBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -14,6 +15,7 @@ export class App implements OnInit{
   protected readonly title = signal('Notes_App');
   users:UserDto[]=[];
   showPassword = false;
+  isRegistered=false;
 
 
 ngOnInit(): void {
