@@ -6,7 +6,6 @@
       <h1 class="text-xl font-semibold ">My Notes</h1>
     </li>
     <li class="text-xl font-semibold">Welcome Arun</li>
-
   </ul>
 </nav>
 <section class="mt-16 flex w-full ml-0">
@@ -23,18 +22,14 @@
 
 
 <!-- ================= NAVBAR ================= -->
-<header
-    class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 shadow-sm z-50">
+<header class="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 shadow-sm z-50">
 
     <div class="h-full flex items-center justify-between px-6">
 
         <!-- Logo -->
         <div class="flex items-center gap-3">
 
-            <img
-                src="/BDicon.png"
-                class="w-10 h-10 rounded-lg shadow"
-                alt="Logo">
+            <img src="/BDicon.png" class="w-10 h-10 rounded-lg shadow" alt="Logo">
 
             <div>
                 <h1 class="text-xl font-bold text-gray-800">
@@ -54,16 +49,13 @@
             <!-- Search -->
             <div class="hidden md:block">
 
-                <input
-                    type="text"
-                    placeholder="Search notes..."
+                <input type="text" placeholder="Search notes..."
                     class="w-72 rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
 
             </div>
 
             <!-- Notification -->
-            <button
-                class="relative text-gray-600 hover:text-blue-600 cursor-pointer">
+            <button class="relative text-gray-600 hover:text-blue-600 cursor-pointer">
 
                 🔔
 
@@ -75,21 +67,45 @@
             </button>
 
             <!-- User -->
-            <div class="flex items-center gap-3 cursor-pointer">
-
-                <img
-                    src="https://ui-avatars.com/api/?name=Arun"
-                    class="w-10 h-10 rounded-full">
-
+            <div class="profile-menu relative flex items-center gap-3 cursor-pointer">
+                <button (click)="showMenu=!showMenu" class="hover:cursor-pointer">
+                    <img src="https://ui-avatars.com/api/?name={{user?.name}}" class="w-10 h-10 rounded-full">
+                </button>
                 <div class="hidden md:block">
 
                     <h3 class="font-semibold text-gray-800">
-                        Arun
+                        {{user?.name}}
                     </h3>
-
+                    @if(isAdmin){
                     <p class="text-sm text-gray-500">
-                        Administrator
+                        Role : Administrator
                     </p>
+                    }
+                    @if(showMenu){
+                    <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg">
+
+                        <button class="w-full text-left px-4 py-3 hover:bg-gray-200 cursor-pointer"
+                            (click)="goToProfile()">
+
+                            👤 Profile
+
+                        </button>
+                        <button class="w-full text-left px-4 py-3 hover:bg-gray-200" >
+
+                            🔒 Change Password
+
+                        </button>
+                        <button class="w-full text-left px-4 py-3 text-red-600 hover:bg-gray-200 cursor-pointer"
+                            (click)="logout()">
+
+                            🚪 Logout
+
+                        </button>
+
+                    </div>
+                    }
+
+
 
                 </div>
 
@@ -131,4 +147,3 @@
     </main>
 
 </div>
-

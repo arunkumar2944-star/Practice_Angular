@@ -3,6 +3,7 @@ import { Home } from './home';
 import { Dashboard } from '../dashboard/dashboard';
 import { Notes } from '../notes/notes';
 import { User } from '../user/user';
+import{Profile} from '../user/profile/profile'
 
 export const HOME_ROUTES: Routes = [
   {
@@ -17,6 +18,10 @@ export const HOME_ROUTES: Routes = [
       {
         path: 'dashboard',
         component: Dashboard
+      },
+      {
+        path: 'profile',
+        component: Profile
       },
       {
         path: 'notes',

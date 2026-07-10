@@ -39,8 +39,8 @@ login(){
         alert('Login Successful');
         this.lsUser=response.user;
         this.userService.update(this.lsUser)
+        localStorage.setItem('token',response.token)
         this.router.navigate(['/home']);
-        
       },  
       error: (error) => {
         console.error('Login failed', error);
