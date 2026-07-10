@@ -1,4 +1,4 @@
-import { Service } from '@angular/core';
+import { Service , signal} from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,6 +9,12 @@ import { User } from '../../app/user/user';
   providedIn: 'root'
 })
 export class UserService {
+
+  private readonly localStorageIdentifier='user';
+
+   private _user= signal<UserDto>(this.getuserFLS());
+
+   readonly user=this._user.asReadonly();
 
   private apiUrl=environment.apiUrl;
   constructor(private http: HttpClient) {}
@@ -34,4 +40,23 @@ export class UserService {
     console.log(User, `{this.apiUrl}/login`)
     return this.http.post<any>(`${this.apiUrl}/login`, User);
   }
+
+
+   update(inputuser:UserDto){
+        this._user.set({...inputuser});
+        this.updateuserToLS()
+    }
+
+    getuserFLS(){
+        const usertring=localStorage.getItem(this.localStorageIdentifier)
+        return JSON.parse(usertring || '[]')
+
+    }
+    updateuserToLS(){
+        localStorage.setItem(
+            this.
+            localStorageIdentifier,
+            JSON.stringify(this.user())
+        )
+    }
 }

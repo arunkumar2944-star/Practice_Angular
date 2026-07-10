@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, Re
 import { UserService } from '../../../shared/services/userService';
 import { UserDto } from '../../../shared/models/UserDto';
 import { Router } from '@angular/router';
+import { UserType } from '../../../shared/models/UserType.enum';
 @Component({
   selector: 'app-registration',
   imports: [FormsModule, ReactiveFormsModule],
@@ -36,7 +37,7 @@ export class Registration {
       age: this.userForm.controls.age.value ?? 0,
       gender: this.userForm.controls.gender.value ?? '',
       email: this.userForm.controls.email.value ?? '',
-
+      type:UserType.User,
       password: this.userForm.controls.password.value ?? '',
       phoneNo: Number(this.userForm.controls.phoneNo.value ?? 0)
 

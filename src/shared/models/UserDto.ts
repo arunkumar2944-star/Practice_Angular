@@ -8,7 +8,7 @@ export interface UserDto{
     email:string,
     password:string,
     phoneNo:number,
-    usertype?:UserType|UserType.Admin,
+    type?:UserType|UserType.Admin,
     createdBy?:number|0,
     createdAt?:Date,
     updatedBy?:number|0,

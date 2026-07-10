@@ -1,4 +1,4 @@
-
+@if(!isAdmin){
 <!-- Dashboard -->
 <div class="p-6 bg-gray-100 min-h-screen">
 
@@ -164,7 +164,17 @@
 
       </div>
 
-      <!-- Admin Panel (Show only for Admin) -->
+     
+
+    </div>
+
+  </div>
+
+</div>
+}
+@if (isAdmin)
+{
+ <!-- Admin Panel (Show only for Admin) -->
       <div class="bg-white rounded-xl shadow p-6">
 
         <h2 class="text-xl font-semibold mb-4">
@@ -188,10 +198,5 @@
         </div>
 
       </div>
+}
 
-    </div>
-
-  </div>
-
-</div>
-```

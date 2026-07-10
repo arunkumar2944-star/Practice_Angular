@@ -1,23 +1,29 @@
-import { Component, inject ,output} from '@angular/core';
+import { Component, inject ,output,OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators, ɵInternalFormsSharedModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 import { UserService } from '../../../shared/services/userService';
 import { UserDto } from '../../../shared/models/UserDto';
 import { Router } from '@angular/router';
 import { email } from '@angular/forms/signals';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, ɵInternalFormsSharedModule,ReactiveFormsModule],
+  imports: [RouterLink, ɵInternalFormsSharedModule,ReactiveFormsModule,JsonPipe],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit{
 
   fb = inject(FormBuilder)
   userService = inject(UserService)
   router=inject(Router)
+  lsUser:any={}
+
+  ngOnInit(): void {
+  this.lsUser=this.userService.user();
+  }
 
   userForm=this.fb.group({
     email:['', [Validators.required, Validators.email]],
@@ -28,10 +34,11 @@ login(){
     email:this.userForm.controls.email.value,
     password:this.userForm.controls.password.value
   }
-  this.userService.loginUser(user).subscribe({
+ const userresponse = this.userService.loginUser(user).subscribe({
       next: (response) => {
         alert('Login Successful');
-        console.log(response)
+        this.lsUser=response.user;
+        this.userService.update(this.lsUser)
         this.router.navigate(['/home']);
         
       },  
