@@ -28,6 +28,10 @@ export class Home implements OnInit {
     this.router.navigate(['home/profile']);
   }
 
+  updatePwd(){
+    this.router.navigate(['/home/updatepassword']);
+
+  }
   logout() {
 
     // localStorage.removeItem('token');

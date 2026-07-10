@@ -15,7 +15,7 @@ export class Profile {
 
   user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  isAdmin = this.user.usertype === 0;
+  isAdmin = this.user.type === 0;
 
   updateProfile() {
 

@@ -4,6 +4,7 @@ import { Dashboard } from '../dashboard/dashboard';
 import { Notes } from '../notes/notes';
 import { User } from '../user/user';
 import{Profile} from '../user/profile/profile'
+import { Updatepassword } from '../user/updatepassword/updatepassword';
 
 export const HOME_ROUTES: Routes = [
   {
@@ -30,6 +31,10 @@ export const HOME_ROUTES: Routes = [
       {
         path: 'user',
         component: User
+      },
+      {
+        path: 'updatepassword',
+        component: Updatepassword
       }
     ]
   }

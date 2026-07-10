@@ -1,1 +1,209 @@
-<p>notes works!</p>
+<div class="min-h-screen bg-gray-100 p-6">
+
+    <div class="max-w-5xl mx-auto">
+
+        <!-- Header -->
+        <div class="mb-8 flex items-center justify-between">
+
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">
+                    Create Note
+                </h1>
+
+                <p class="text-gray-500 mt-1">
+                    Organize your thoughts and important information.
+                </p>
+            </div>
+
+            <button class="px-6 py-3 bg-emerald-600 text-white rounded-xl shadow hover:bg-emerald-700 transition">
+                Save Note
+            </button>
+
+        </div>
+
+        <form class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Main Content -->
+            <div class="lg:col-span-2 bg-white rounded-2xl shadow p-6 space-y-6">
+
+                <!-- Title -->
+                <div>
+
+                    <label class="block mb-2 font-semibold text-gray-700">
+                        Title
+                    </label>
+
+                    <input type="text" placeholder="Enter note title..."
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none">
+
+                </div>
+
+                <!-- Details -->
+                <div>
+
+                    <label class="block mb-2 font-semibold text-gray-700">
+                        Details
+                    </label>
+
+                    <textarea rows="10" placeholder="Write your note..."
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 resize-none focus:ring-2 focus:ring-emerald-500 outline-none"></textarea>
+
+                </div>
+
+                <!-- Tags -->
+
+                <div>
+
+                    <label class="block mb-2 font-semibold text-gray-700">
+                        Tags
+                    </label>
+
+                    <input type="text" placeholder="Angular, Work, Ideas..."
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none">
+
+                </div>
+
+                <!-- Attachment -->
+
+                <div>
+
+                    <label class="block mb-2 font-semibold text-gray-700">
+                        Attachment
+                    </label>
+
+                    <input type="file" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+
+                </div>
+
+            </div>
+
+            <!-- Side Panel -->
+
+            <div class="bg-white rounded-2xl shadow p-6 space-y-5">
+
+                <h2 class="text-lg font-bold text-gray-800">
+                    Note Settings
+                </h2>
+
+                <!-- Date -->
+
+                <div>
+
+                    <label class="block mb-2 font-medium text-gray-700">
+                        Date
+                    </label>
+
+                    <input type="date" class="w-full border border-gray-300 rounded-xl px-4 py-3">
+
+                </div>
+
+                <!-- Category -->
+
+                <div>
+
+                    <label class="block mb-2 font-medium text-gray-700">
+                        Category
+                    </label>
+
+                    <select class="w-full border border-gray-300 rounded-xl px-4 py-3">
+
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>Study</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Priority -->
+
+                <div>
+
+                    <label class="block mb-2 font-medium text-gray-700">
+                        Priority
+                    </label>
+
+                    <select class="w-full border border-gray-300 rounded-xl px-4 py-3">
+
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+
+                    </select>
+
+                </div>
+
+                <!-- Favorite -->
+
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+
+                    <div>
+
+                        <h3 class="font-medium text-gray-800">
+                            Favorite
+                        </h3>
+
+                        <p class="text-sm text-gray-500">
+                            Add this note to favorites.
+                        </p>
+
+                    </div>
+
+                    <input type="checkbox" class="w-5 h-5 accent-emerald-600">
+
+                </div>
+
+                <!-- Status -->
+
+                <div>
+
+                    <label class="block mb-2 font-medium text-gray-700">
+                        Status
+                    </label>
+
+                    <select
+                        class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none">
+
+                        <option value="Draft">
+                            📝 Draft
+                        </option>
+
+                        <option value="Active">
+                            ✅ Active
+                        </option>
+
+                        <option value="Archived">
+                            📦 Archived
+                        </option>
+
+                    </select>
+
+                    <p class="mt-2 text-sm text-gray-500">
+                        Draft notes are private, active notes are visible, and archived notes are stored for later.
+                    </p>
+
+                </div>
+
+                <!-- Statistics -->
+
+                <div class="border-t pt-4 text-sm text-gray-500 space-y-2">
+
+                    <div class="flex justify-between">
+                        <span>Characters</span>
+                        <span>0</span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Words</span>
+                        <span>0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

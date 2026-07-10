@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/userService';
 import { UserType } from '../../shared/models/UserType.enum';
+import{Router} from '@angular/router'
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +14,7 @@ export class Dashboard implements OnInit {
   userService = inject(UserService)
   isAdmin = false;
   userdata = this.userService.user()
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     // console.log('this is from dashboard :' + this.userdata.type, UserType.Admin)
@@ -21,6 +23,8 @@ export class Dashboard implements OnInit {
     }
 
   }
-
+  noteAdd(){
+    this.router.navigate(['/home/notes']);
+  }
 
 }

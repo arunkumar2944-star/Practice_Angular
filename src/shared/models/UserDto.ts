@@ -10,6 +10,7 @@ export interface UserDto{
     phoneNo:number,
     token?:string,
     type?:UserType|UserType.Admin,
+    // user?:UserDto,
     createdBy?:number|0,
     createdAt?:Date,
     updatedBy?:number|0,
