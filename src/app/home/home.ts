@@ -3,9 +3,12 @@ import { RouterOutlet, Router } from '@angular/router';
 import { SideBar } from '../../shared/components/side-bar/side-bar';
 import { UserDto } from '../../shared/models/UserDto';
 import { UserType } from '../../shared/models/UserType.enum';
+import { Notes } from "../notes/notes";
+import { NoteForm } from "../notes/note-form/note-form";
+import { NoteList } from "../notes/note-list/note-list";
 @Component({
   selector: 'app-home',
-  imports: [RouterOutlet, SideBar],
+  imports: [RouterOutlet, SideBar, Notes, NoteForm, NoteList],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

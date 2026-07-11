@@ -1,11 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/userService';
 import { UserType } from '../../shared/models/UserType.enum';
-import{Router} from '@angular/router'
+import{ Router, RouterOutlet } from '@angular/router'
+import { NoteList } from "../notes/note-list/note-list";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [RouterOutlet, NoteList],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -21,10 +22,10 @@ export class Dashboard implements OnInit {
     if (this.userdata.type === UserType.Admin) {
       this.isAdmin = true;
     }
-
+//this.router.navigate(['/home/notes/']);
   }
   noteAdd(){
-    this.router.navigate(['/home/notes']);
+    this.router.navigate(['/home/notes/']);
   }
 
 }

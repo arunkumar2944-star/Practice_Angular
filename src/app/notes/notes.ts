@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterOutlet, Router } from '@angular/router';
 
 @Component({
   selector: 'app-notes',
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './notes.html',
   styleUrl: './notes.css',
 })
