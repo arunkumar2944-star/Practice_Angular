@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { UserType } from '../../../models/UserType.enum';
 
 
 @Component({
@@ -10,5 +11,5 @@ import { RouterLink } from "@angular/router";
 })
 export class SideBarItem {
 
-   @Input () route!:{path:string[],name:string};
+   @Input () route!:{title:string,route:string,icon:string,description:string,allowedUserType:UserType};
 }

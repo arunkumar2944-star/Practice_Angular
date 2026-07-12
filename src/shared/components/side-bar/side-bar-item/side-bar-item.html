@@ -1,1 +1,3 @@
-<a [routerLink]="route.path" class=" transition-all duration-300 px-5 block text-emerald-50 py-2 hover:tracking-wider hover:bg-gray-400">{{route.name}}</a>
+<a [routerLink]="route.route" class="transition-all duration-300 px-5 block text-black py-2 hover:tracking-wider hover:bg-gray-400">
+    <i [class]="route.icon"></i>
+    {{route.title}}</a>

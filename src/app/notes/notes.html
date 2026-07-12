@@ -1,1 +1,202 @@
-<h1 class="pt-17">notes component created</h1>
+<!-- Welcome -->
+<div class="mb-8 pt-16 mt-2 p-2">
+    <h1 class="text-3xl font-bold text-gray-800">
+        <!-- Welcome -->
+        Welcome, {{userdata.name}} 👋
+    </h1>
+    <p class="text-gray-500 mt-2">
+        Here's an overview of your Notes application.
+    </p>
+</div>
+<!-- @if(!isAdmin){ -->
+<!-- Dashboard -->
+<div class="p-6 bg-gray-100 min-h-screen">
+
+
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-blue-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500">Total Notes</p>
+                    <h2 class="text-3xl font-bold mt-2">52</h2>
+                </div>
+                <span class="text-5xl">📝</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-yellow-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500">Favorites</p>
+                    <h2 class="text-3xl font-bold mt-2">12</h2>
+                </div>
+                <span class="text-5xl">⭐</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-green-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500">Today's Notes</p>
+                    <h2 class="text-3xl font-bold mt-2">5</h2>
+                </div>
+                <span class="text-5xl">📅</span>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-red-500">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-gray-500">Trash</p>
+                    <h2 class="text-3xl font-bold mt-2">3</h2>
+                </div>
+                <span class="text-5xl">🗑️</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid lg:grid-cols-2 gap-6 mt-8">
+
+        <!-- Recent Notes -->
+        <app-note-list></app-note-list>
+
+        <!-- Right Panel -->
+        <div class="space-y-6">
+
+            <!-- Quick Actions -->
+            <div class="bg-white rounded-xl shadow p-6">
+
+                <h2 class="text-xl font-semibold mb-4">
+                    Today's Notes
+                </h2>
+
+                <div class="grid gap-3">
+                    <div class="space-y-4">
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
+                            <h3 class="font-semibold">
+                                Angular Learning
+                            </h3>
+                            <p class="text-gray-500 mt-1">
+                                Components, Routing, Services, Signals...
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">
+                                Updated 2 hours ago
+                            </p>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
+                            <h3 class="font-semibold">
+                                Angular Learning
+                            </h3>
+                            <p class="text-gray-500 mt-1">
+                                Components, Routing, Services, Signals...
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">
+                                Updated 2 hours ago
+                            </p>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
+                            <h3 class="font-semibold">
+                                Meeting Notes
+                            </h3>
+                            <p class="text-gray-500 mt-1">
+                                Client discussion and project requirements.
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">
+                                Updated Yesterday
+                            </p>
+                        </div>
+
+                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
+                            <h3 class="font-semibold">
+                                Shopping List
+                            </h3>
+                            <p class="text-gray-500 mt-1">
+                                Milk, Bread, Vegetables...
+                            </p>
+                            <p class="text-sm text-gray-400 mt-2">
+                                Updated 2 days ago
+                            </p>
+                        </div>
+
+                    </div>
+                    <!-- <button class="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
+            ➕ Create Note
+          </button>
+
+          <button class="bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+            ⭐ Favorites
+          </button>
+
+          <button class="bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600">
+            📂 Archived
+          </button>
+          <button class="bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700">
+            🕒 Recent
+          </button> -->
+                </div>
+
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-xl shadow p-6">
+
+                <h2 class="text-xl font-semibold mb-4">
+                    Recent Activity
+                </h2>
+
+                <ul class="space-y-4 text-gray-600">
+
+                    <li>📝 Created <strong>Angular Notes</strong></li>
+
+                    <li>⭐ Added <strong>Meeting Notes</strong> to Favorites</li>
+
+                    <li>✏️ Updated <strong>Shopping List</strong></li>
+
+                    <li>🗑 Deleted <strong>Old Note</strong></li>
+
+                </ul>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+<!-- }
+@if (isAdmin)
+{ -->
+<!-- Admin Panel (Show only for Admin) -->
+<!-- <div class="bg-white rounded-xl shadow p-6">
+
+  <h2 class="text-xl font-semibold mb-4">
+    Admin Panel
+  </h2>
+
+  <div class="space-y-3">
+
+    <button class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">
+      👥 Manage Users
+    </button>
+
+    <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700">
+      📊 Reports
+    </button>
+
+    <button class="w-full bg-gray-800 text-white py-3 rounded-lg hover:bg-black">
+      ⚙️ System Settings
+    </button>
+
+  </div>
+
+</div>
+} -->

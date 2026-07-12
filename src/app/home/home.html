@@ -90,7 +90,8 @@
                             👤 Profile
 
                         </button>
-                        <button class="w-full text-left px-4 py-3 hover:bg-gray-200 cursor-pointer" (click)="updatePwd()" >
+                        <button class="w-full text-left px-4 py-3 hover:bg-gray-200 cursor-pointer"
+                            (click)="updatePwd()">
 
                             🔒 Change Password
 
@@ -118,8 +119,23 @@
 </header>
 
 <!-- ================= MAIN LAYOUT ================= -->
- 
-<div>
 
-<router-outlet></router-outlet>
- </div>
+<div>
+    <aside class="w-72 h-screen fixed scrollbar-none mt-14 bg-white border-b border-gray-200 text-black shadow-lg">
+
+        <div class="p-6 border-b border-gray-700">
+
+            <h2 class="font-semibold text-lg">
+                Navigation
+            </h2>
+
+        </div>
+
+        <app-side-bar></app-side-bar>
+
+    </aside>
+    <div class="ml-73">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
