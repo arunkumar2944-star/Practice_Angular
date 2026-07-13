@@ -6,6 +6,7 @@ import { UserDto } from '../../../shared/models/UserDto';
 import { Router } from '@angular/router';
 import { email } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
+import { UserType } from '../../../shared/models/UserType.enum';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class Login implements OnInit{
   lsUser:any={}
 
   ngOnInit(): void {
-  this.lsUser=this.userService.user();
+  this.lsUser=this.userService.user() as UserDto;
   }
 
   userForm=this.fb.group({
@@ -34,19 +35,25 @@ login(){
     email:this.userForm.controls.email.value,
     password:this.userForm.controls.password.value
   }
+  console.log(user);
  const userresponse = this.userService.loginUser(user).subscribe({
       next: (response) => {
         alert('Login Successful');
         this.lsUser=response.user;
         this.userService.update(this.lsUser)
         localStorage.setItem('token',response.token)
-        this.router.navigate(['/home']);
+        if(this.lsUser.type===UserType.User)
+        {
+        this.router.navigate(['/home/notes']);
+        }
+        else{
+          this.router.navigate(['/home'])
+        }
       },  
       error: (error) => {
-        console.error('Login failed', error);
+        console.log('Login failed', error);
         alert('Login Failed');
       }
-      
     });
 }
 

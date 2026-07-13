@@ -1,12 +1,12 @@
-<div class="min-h-screen bg-gradient-to-br from-blue-100 via-slate-100 to-indigo-200 flex items-center justify-center p-6">
+<div
+    class="min-h-screen bg-gradient-to-br from-blue-100 via-slate-100 to-indigo-200 flex items-center justify-center p-6">
 
     <div class="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8">
 
         <!-- Logo -->
         <div class="text-center mb-8">
 
-            <div
-                class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center mx-auto shadow-lg">
+            <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center mx-auto shadow-lg">
 
                 <span class="text-3xl text-white font-bold">A</span>
 
@@ -31,12 +31,23 @@
                     Full Name
                 </label>
 
-                <input
-                    type="text"
-                    formControlName="name"
-                    placeholder="Enter your name"
+                <input type="text" formControlName="name" placeholder="Enter your name"
                     class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                @if (userForm.controls.name?.touched &&
+                userForm.controls.name?.invalid) {
 
+                <p class="text-red-500 text-sm mt-1">
+
+                    @if (userForm.controls.name?.errors?.['required']) {
+                    Name is required.
+                    }
+
+                    @if (userForm.controls.name?.errors?.['minlength']) {
+                    Name must contain at least 3 characters.
+                    }
+
+                </p>
+                }
             </div>
 
             <!-- Age & Gender -->
@@ -49,12 +60,24 @@
                         Age
                     </label>
 
-                    <input
-                        type="number"
-                        formControlName="age"
-                        placeholder="Age"
+                    <input type="number" formControlName="age" placeholder="Age"
                         class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
 
+                    @if (userForm.controls.age?.touched &&
+                    userForm.controls.age?.invalid) {
+
+                    <p class="text-red-500 text-sm mt-1">
+
+                        @if (userForm.controls.age?.errors?.['required']) {
+                        Age is required.
+                        }
+
+                        @if (userForm.controls.age?.errors?.['min']) {
+                        Minimum age is 18.
+                        }
+
+                    </p>
+                    }
                 </div>
 
                 <div>
@@ -63,8 +86,7 @@
                         Gender
                     </label>
 
-                    <select
-                    formControlName="gender"
+                    <select formControlName="gender"
                         class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
 
                         <option value="">Select</option>
@@ -73,6 +95,14 @@
                         <option>Other</option>
 
                     </select>
+
+                    @if (userForm.controls.gender?.touched &&
+                    userForm.controls.gender?.invalid) {
+
+                    <p class="text-red-500 text-sm mt-1">
+                        Please select your gender.
+                    </p>
+                    }
 
                 </div>
 
@@ -86,12 +116,23 @@
                     Email Address
                 </label>
 
-                <input
-                    type="email"
-                    formControlName="email"
-                    placeholder="example@gmail.com"
+                <input type="email" formControlName="email" placeholder="example@gmail.com"
                     class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                @if (userForm.controls.email?.touched &&
+                userForm.controls.email?.invalid) {
 
+                <p class="text-red-500 text-sm mt-1">
+
+                    @if (userForm.controls.email?.errors?.['required']) {
+                    Email is required.
+                    }
+
+                    @if (userForm.controls.email?.errors?.['email']) {
+                    Enter a valid email address.
+                    }
+
+                </p>
+                }
             </div>
 
             <!-- Phone -->
@@ -102,12 +143,23 @@
                     Phone Number
                 </label>
 
-                <input
-                    type="tel"
-                    placeholder="9876543210"
-                    formControlName="phoneNo"
+                <input type="tel" placeholder="9876543210" formControlName="phoneNo"
                     class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                @if (userForm.get('phoneNo')?.touched &&
+                userForm.get('phoneNo')?.invalid) {
 
+                <p class="text-red-500 text-sm mt-1">
+
+                    @if (userForm.controls.phoneNo?.errors?.['required']) {
+                    Phone number is required.
+                    }
+
+                    @if (userForm.controls.phoneNo?.errors?.['pattern']) {
+                    Enter a valid 10-digit phone number.
+                    }
+
+                </p>
+                }
             </div>
 
             <!-- Password -->
@@ -120,26 +172,39 @@
 
                 <div class="relative">
 
-                    <input
-                        [type]="showPassword ? 'text' : 'password'"
-                        placeholder="Enter Password"
+                    <input [type]="showPassword ? 'text' : 'password'" placeholder="Enter Password"
                         formControlName="password"
                         class="w-full border rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none">
 
-                    <button
-                        type="button"
-                        (click)="showPassword=!showPassword"
+                    <button type="button" (click)="showPassword=!showPassword"
                         class="absolute inset-y-0 right-4 flex items-center text-gray-200 hover:text-gray-500 cursor-pointer">
 
-                        <i
-                            class="fa-solid"
-                            [class.fa-eye]="!showPassword"
-                            [class.fa-eye-slash]="showPassword">
+                        <i class="fa-solid" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword">
                         </i>
 
                     </button>
 
                 </div>
+
+                @if (userForm.get('password')?.touched &&
+                userForm.get('password')?.invalid) {
+
+                <p class="text-red-500 text-sm mt-1">
+
+                    @if (userForm.controls.password) {
+                    Password is required.
+                    }
+
+                    @if (userForm.controls.password?.errors?.['minlength']) {
+                    Password must contain at least 8 characters.
+                    }
+
+                    @if (userForm.controls.password?.errors?.['pattern']) {
+                    Must contain uppercase, lowercase, number and special character.
+                    }
+
+                </p>
+                }
 
             </div>
 
@@ -153,36 +218,41 @@
 
                 <div class="relative">
 
-                    <input
-                        [type]="showConfirmPassword ? 'text' : 'password'"
-                        placeholder="Confirm Password"
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirm Password"
+                        formControlName="confirmPassword"
                         class="w-full border rounded-xl px-4 py-3 pr-12 focus:ring-2 focus:ring-blue-500 outline-none">
 
-                    <button
-                        type="button"
-                        (click)="showConfirmPassword=!showConfirmPassword"
+                    <button type="button" (click)="showConfirmPassword=!showConfirmPassword"
                         class="absolute inset-y-0 right-4 flex items-center text-gray-200 hover:text-gray-500 cursor-pointer">
 
-                        <i
-                            class="fa-solid"
-                            [class.fa-eye]="!showConfirmPassword"
+                        <i class="fa-solid" [class.fa-eye]="!showConfirmPassword"
                             [class.fa-eye-slash]="showConfirmPassword">
                         </i>
 
                     </button>
 
                 </div>
+                @if (userForm.controls.confirmPassword?.touched &&
+                userForm.controls.confirmPassword?.invalid) {
 
+                <p class="text-red-500 text-sm mt-1">
+                    Confirm password is required.
+                </p>
+                }
             </div>
 
             <!-- Register Button -->
 
-            <button
-                type="submit"
+            <!-- <button type="submit"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold shadow-lg transition">
 
                 Create Account
 
+            </button> -->
+            <button type="submit" [disabled]="userForm.invalid"
+                class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold shadow-lg transition">
+
+                Create Account
             </button>
 
             <!-- Footer -->
@@ -191,9 +261,7 @@
 
                 Already have an account?
 
-                <a
-                    href="/login"
-                    class="text-blue-600 font-semibold hover:underline">
+                <a href="/login" class="text-blue-600 font-semibold hover:underline">
 
                     Login
 
@@ -202,5 +270,7 @@
             </p>
 
         </form>
+
+
     </div>
 </div>

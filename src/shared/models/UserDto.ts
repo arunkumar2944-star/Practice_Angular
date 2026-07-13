@@ -7,6 +7,7 @@ export interface UserDto{
     gender:string,
     email:string,
     password:string,
+    confirmPassword:string,
     phoneNo:number,
     token?:string,
     type?:UserType|UserType.Admin,

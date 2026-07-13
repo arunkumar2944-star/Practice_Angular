@@ -50,7 +50,7 @@ export class UserService {
   }
 
   loginUser(User: any): Observable<any> {
-    //console.log('user'+JSON.stringify(User))
+    console.log('user'+JSON.stringify(User))
      const header=this.setheader();
     return this.http.post<any>(`${this.apiUrl}/login`, User);
   }

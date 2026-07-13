@@ -30,7 +30,14 @@
                     <input type="email" placeholder="john@example.com"
                     formControlName="email"
                         class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
-                </div>
+             @if (userForm.controls.email?.invalid && (userForm.controls.email?.touched || userForm.controls.email?.dirty)) {
+      <div class="error-msg  text-red-500 text-sm mt-1">
+        @if (userForm.controls.email?.errors?.['required']) { <span>Email is required.</span> }
+        @if (userForm.controls.email?.errors?.['email']) { <span>Please enter a valid email.</span> }
+      </div>
+    }    
+            
+            </div>
 
                 <!-- Password -->
                 <div class="relative">
@@ -47,6 +54,13 @@
                         </i>
 
                     </button>
+
+                    @if (userForm.controls.password?.invalid && (userForm.controls.password?.touched || userForm.controls.password?.dirty)) {
+      <div class="error-msg text-red-500 text-sm mt-1">
+        @if (userForm.controls.password?.errors?.['required']) { <span>Password is required.</span> }
+        @if (userForm.controls.password?.errors?.['minlength']) { <span>Password must be at least 8 characters.</span> }
+      </div>
+    }
                 </div>
 
                 <!-- Remember -->
@@ -65,7 +79,8 @@
 
                 <!-- Login Button -->
                 <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition duration-300 shadow-lg hover:shadow-xl">
+                [disabled]="userForm.invalid"
+                    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-3 enabled:cursor-pointer enabled:hover:transition-colors rounded-xl font-semibold shadow-lg transition">
                     Sign In
                 </button>
 

@@ -12,15 +12,15 @@ export const HOME_ROUTES: Routes = [
     path: '',
     component: Home,
     children: [
-      {
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
-      },
-      {
-        path: 'dashboard',
-        component: Dashboard
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'dashboard',
+      //   pathMatch: 'full'
+      // },
+      // {
+      //   path: 'dashboard',
+      //   component: Dashboard
+      // },
       {
         path: 'profile',
         component: Profile
@@ -40,7 +40,7 @@ export const HOME_ROUTES: Routes = [
 
 
       {
-              path: "**", component: Dashboard //wildcard entry should be in last
+              path: "**", component: Notes //wildcard entry should be in last
           }
     ]
   }
