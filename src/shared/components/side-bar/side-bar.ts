@@ -22,9 +22,9 @@ export class SideBar implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(
-      'userdata ' + JSON.stringify(this.userService.getuserFLS())
-    );
+    // console.log(
+    //   'userdata ' + JSON.stringify(this.userService.getuserFLS())
+    // );
 
     if (this.userdata.type === UserType.User) {
 

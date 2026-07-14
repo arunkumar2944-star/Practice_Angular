@@ -35,11 +35,12 @@ login(){
     email:this.userForm.controls.email.value,
     password:this.userForm.controls.password.value
   }
-  console.log(user);
  const userresponse = this.userService.loginUser(user).subscribe({
       next: (response) => {
         alert('Login Successful');
+
         this.lsUser=response.user;
+        delete this.lsUser.password
         this.userService.update(this.lsUser)
         localStorage.setItem('token',response.token)
         if(this.lsUser.type===UserType.User)

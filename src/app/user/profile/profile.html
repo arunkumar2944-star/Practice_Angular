@@ -30,8 +30,8 @@
 
                 </div>
                 <p class="text-center mt-8 text-gray-600">
-                    
-<!-- (click)="redirect()" -->
+
+                    <!-- (click)="redirect()" -->
                     <a routerLink="/home/notes" class="text-blue-600 font-semibold hover:underline cursor-pointer">
                         Back to Dashboard
                     </a>
@@ -77,7 +77,7 @@
                     <label class="text-gray-500">Joined Date</label>
 
                     <p class="text-lg font-medium">
-                        <!-- {{ user.createdAt | date:'dd-MM-yyyy' }} -->
+                        {{ user.createdAt | date:'dd-MM-yyyy' }}
                     </p>
                 </div>
 
@@ -87,33 +87,147 @@
 
             @if(isEdit) {
 
-            <form class="mt-10 border-t pt-8" (ngSubmit)="updateProfile()">
+            <form [formGroup]="profileForm" class="mt-10 border-t pt-8" (ngSubmit)="updateProfile()">
 
                 <h2 class="text-xl font-semibold mb-6">
                     Edit Profile
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
 
-                    <input type="text" /* [(ngModel)]="user.name" */ name="name" placeholder="Name"
-                        class="border rounded-lg px-4 py-3">
+                        <input type="text" formControlName="name" placeholder="Name" class="border rounded-lg px-4 py-3"
+                            [class.border-red-500]="profileForm.controls.name.touched && profileForm.controls.name.invalid">
 
-                    <input type="email" /* [(ngModel)]="user.email" */ name="email" placeholder="Email"
-                        class="border rounded-lg px-4 py-3">
+                        @if (profileForm.controls.name.touched &&
+                        profileForm.controls.name.invalid) {
 
-                    <input type="text" /* [(ngModel)]="user.phoneNo" */ name="phoneNo" placeholder="Phone Number"
-                        class="border rounded-lg px-4 py-3">
+                        <p class="text-red-500 text-sm mt-1">
 
-                    <input type="number" /* [(ngModel)]="user.age" */ name="age" placeholder="Age"
-                        class="border rounded-lg px-4 py-3">
+                            @if (profileForm.controls.name.errors?.['required']) {
+                            Name is required.
+                            }
+
+                            @if (profileForm.controls.name.errors?.['minlength']) {
+                            Name must contain at least 3 characters.
+                            }
+
+                            @if (profileForm.controls.name.errors?.['maxlength']) {
+                            Name must not exceed 50 characters.
+                            }
+
+                        </p>
+                        }
+                    </div>
+                    <div>
+                        <input type="email" formControlName="email" placeholder="Email"
+                            class="border rounded-lg px-4 py-3"
+                            [class.border-red-500]="profileForm.controls.email.touched && profileForm.controls.email.invalid">
+
+                        @if (profileForm.controls.email.touched &&
+                        profileForm.controls.email.invalid) {
+
+                        <p class="text-red-500 text-sm mt-1">
+
+                            @if (profileForm.controls.email.errors?.['required']) {
+                            Email is required.
+                            }
+
+                            @if (profileForm.controls.email.errors?.['email']) {
+                            Please enter a valid email address.
+                            }
+
+                        </p>
+                        }
+
+
+                    </div>
+                    <div>
+                        <input type="text" formControlName="phoneNo" placeholder="Phone Number"
+                            class="border rounded-lg px-4 py-3"
+                            [class.border-red-500]="profileForm.controls.phoneNo.touched && profileForm.controls.phoneNo.invalid">
+
+                        @if (profileForm.controls.phoneNo.touched &&
+                        profileForm.controls.phoneNo.invalid) {
+
+                        <p class="text-red-500 text-sm mt-1">
+
+                            @if (profileForm.controls.phoneNo.errors?.['required']) {
+                            Phone number is required.
+                            }
+
+                            @if (profileForm.controls.phoneNo.errors?.['pattern']) {
+                            Enter a valid 10-digit phone number.
+                            }
+
+                        </p>
+                        }
+
+                    </div>
+
+                    <div>
+                        <input type="number" formControlName="age" placeholder="Age" class="border rounded-lg px-4 py-3"
+                            [class.border-red-500]="profileForm.controls.age.touched && profileForm.controls.age.invalid">
+
+                        @if (profileForm.controls.age.touched &&
+                        profileForm.controls.age.invalid) {
+
+                        <p class="text-red-500 text-sm mt-1">
+
+                            @if (profileForm.controls.age.errors?.['required']) {
+                            Age is required.
+                            }
+
+                            @if (profileForm.controls.age.errors?.['min']) {
+                            Minimum age is 18.
+                            }
+
+                            @if (profileForm.controls.age.errors?.['max']) {
+                            Maximum age is 100.
+                            }
+
+                        </p>
+                        }
+
+
+
+
+                    </div>
+                    <div>
+                        <select formControlName="gender"
+                            class="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none"
+                            [class.border-red-500]="profileForm.controls.gender.touched && profileForm.controls.gender.invalid">
+                            <option value="">Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+
+                        </select>
+
+
+                        @if (profileForm.controls.gender.touched &&
+                        profileForm.controls.gender.invalid) {
+
+                        <p class="text-red-500 text-sm mt-1">
+                            Please select your gender.
+                        </p>
+                        }
+                    </div>
+
 
                 </div>
+                <br>
+                <div class="flex w-full">
+                  <button
+    type="submit"
+    [disabled]="profileForm.invalid"
+    class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-3 rounded-xl font-semibold shadow-lg transition">
 
-                <button type="submit" class="mt-6 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
+    Save Changes
 
-                    Save Changes
+</button>
+                </div>
 
-                </button>
 
             </form>
 

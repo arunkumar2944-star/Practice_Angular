@@ -2,6 +2,7 @@ import { UserType } from "./UserType.enum";
 
 export interface UserDto{
     id?:string|null,
+    _id?:string|null,
     name:string,
     age:number,
     gender:string,

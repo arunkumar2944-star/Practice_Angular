@@ -1,6 +1,6 @@
 import { Service, signal } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../config/Environment';
 import { UserDto } from '../models/UserDto';
@@ -20,14 +20,13 @@ export class UserService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  private setheader() {
+  private setheader():HttpHeaders {
     const token = localStorage.getItem('token');
-   // console.log('token ' +token);
+    // console.log('token ' +token);
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    // console.log('header ' +headers.get('Authorization'));
     return headers;
   }
 
@@ -42,7 +41,9 @@ export class UserService {
   }
 
   updateUser(id: string, User: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, User);
+
+    const headers = this.setheader()
+    return this.http.put<any>(`${this.apiUrl}/${id}`, User , { headers });
   }
 
   deleteUser(id: string): Observable<any> {
@@ -50,14 +51,15 @@ export class UserService {
   }
 
   loginUser(User: any): Observable<any> {
-    console.log('user'+JSON.stringify(User))
-     const header=this.setheader();
+    // console.log('user' + JSON.stringify(User))
+    const header = this.setheader();
     return this.http.post<any>(`${this.apiUrl}/login`, User);
   }
 
 
   update(inputuser: UserDto) {
     this._user.set({ ...inputuser });
+
     this.updateuserToLS()
   }
 

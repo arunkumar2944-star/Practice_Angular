@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './updatepassword.html',
   styleUrl: './updatepassword.css',
 })
-export class Updatepassword {}
+export class Updatepassword {
+
+  showNPassword=false;
+  showCurPassword=false;
+  showCnfPassword=false;
+
+}
