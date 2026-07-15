@@ -6,6 +6,7 @@ import { environment } from '../config/Environment';
 import { UserDto } from '../models/UserDto';
 import { User } from '../../app/user/user';
 import { Notes } from '../../app/notes/notes';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,7 @@ export class UserService {
   private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) { }
 
-  private setheader():HttpHeaders {
+  private setheader(): HttpHeaders {
     const token = localStorage.getItem('token');
     // console.log('token ' +token);
 
@@ -32,7 +33,7 @@ export class UserService {
 
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(`${this.apiUrl}/'users'`);
   }
 
   createUser(User: UserDto): Observable<any> {
@@ -43,20 +44,31 @@ export class UserService {
   updateUser(id: string, User: any): Observable<any> {
 
     const headers = this.setheader()
-    return this.http.put<any>(`${this.apiUrl}/${id}`, User , { headers });
+    return this.http.put<any>(`${this.apiUrl}/users/${id}`, User, { headers });
   }
 
   deleteUser(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/users/${id}`);
+  }
+
+  updatePassword(data: any): Observable<any> {
+    const headers = this.setheader()
+    return this.http.put<any>(`${this.apiUrl}/users/updatePassword`, data, { headers })
   }
 
   loginUser(User: any): Observable<any> {
     // console.log('user' + JSON.stringify(User))
-    const header = this.setheader();
-    return this.http.post<any>(`${this.apiUrl}/login`, User);
+    //const headers = this.setheader();
+    return this.http.post<any>(`${this.apiUrl}/users/login`, User);
   }
 
+  comparePassword(cmpPassword: any): Observable<any> {
+    //  console.log('user' + JSON.stringify(cmpPassword))
+    const headers = this.setheader();
+    return this.http.post<any>(`${this.apiUrl}/users/comparePassword`, cmpPassword, { headers });
+  }
 
+  //local storage update value functions
   update(inputuser: UserDto) {
     this._user.set({ ...inputuser });
 

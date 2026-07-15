@@ -8,6 +8,7 @@ export function passwordMatchValidator(): ValidatorFn {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
 
+
     // Do not flag an error if fields are still empty
     if (!password || !confirmPassword) {
       return null;
