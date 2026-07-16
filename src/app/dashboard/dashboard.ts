@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../shared/services/userService';
-import { UserType } from '../../shared/models/UserType.enum';
+import { UserType } from '../../shared/models/enum';
 import{ Router, RouterOutlet } from '@angular/router'
 import { NoteList } from "../notes/note-list/note-list";
+import { CommonMethods } from '../../shared/services/common.methods';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ export class Dashboard implements OnInit {
 
   userService = inject(UserService)
   isAdmin = false;
-  userdata = this.userService.user()
+  common=new CommonMethods();
+  userdata = this.common.getfromLS('user')
   constructor(private router: Router) { }
 
   ngOnInit(): void {

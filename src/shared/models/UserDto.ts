@@ -1,4 +1,4 @@
-import { UserType } from "./UserType.enum";
+import { UserType } from "./enum";
 
 export interface UserDto{
     id?:string|null,

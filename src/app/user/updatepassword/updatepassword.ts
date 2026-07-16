@@ -6,7 +6,7 @@ import { UserService } from '../../../shared/services/userService';
 import { passwordStrengthValidator, passwordMatchValidator } from '../password.validator';
 import { disabled } from '@angular/forms/signals';
 import { UserDto } from '../../../shared/models/UserDto';
-
+import { CommonMethods } from '../../../shared/services/common.methods';
 @Component({
   selector: 'app-updatepassword',
   imports: [ReactiveFormsModule],
@@ -21,6 +21,7 @@ export class Updatepassword implements OnInit {
   isSamePassword = false;
   isComparePwd = true;
   isSamecnfPassword = false;
+  common =new CommonMethods();
 
   @ViewChild('currentPasswordInput')
   currentPasswordInput!: ElementRef<HTMLInputElement>;
@@ -55,13 +56,13 @@ export class Updatepassword implements OnInit {
   ngOnInit(): void {
     this.changePasswordForm.controls.password.disable()
     this.changePasswordForm.controls.confirmPassword.disable()
-    setTimeout(() => {
+    queueMicrotask(() => {
       this.currentPasswordInput.nativeElement.focus();
     });
   }
 
   checkPassword() {
-    this.user = this.userService.getuserFLS();
+    this.user = this.common.getfromLS('user');
 
     const cmpPassword = {
       email: this.user.email,

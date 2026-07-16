@@ -2,6 +2,7 @@ import { Component,inject } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 import { NoteList } from './note-list/note-list';
 import { UserService } from '../../shared/services/userService';
+import { CommonMethods } from '../../shared/services/common.methods';
 
 @Component({
   selector: 'app-notes',
@@ -11,8 +12,8 @@ import { UserService } from '../../shared/services/userService';
 })
 export class Notes {
   userService = inject(UserService)
-
-  userdata=this.userService.getuserFLS();
+  common =new CommonMethods();
+  userdata=this.common.getfromLS('user');
   
 
   

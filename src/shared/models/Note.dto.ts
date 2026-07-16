@@ -1,28 +1,29 @@
+import { User } from "../../app/user/user"
+import { Category, Priority, Status, Visibility } from "./enum"
 import { UserDto } from "./UserDto"
 
 export interface NoteDto {
-    id: number | null,
+    // _id: number | null,
     
     title: string,
     details: string,
-    User: UserDto,
-    Tag:string[],
-    attachmentUrl:string,
-    category:string,
-    priyority:string,
-    status?:string,
+    tag:string,
+    attachments:File[],
+    category:Category,
+    priority:Priority,
+    status:Status,
     date: Date,
     dueDate:Date,
     reminderDate:Date,
-    visibility:string,
-
-    createdBy?: UserDto | 0,
-    createdAt?: Date,
-    updatedBy?: UserDto | 0,
-    updatedAt?: Date,
-    isActive?: boolean | true
+    visibility:Visibility,
     isFavorite: boolean,
     isPined:boolean,
     isReminded:boolean
+    user:string
+    createdBy?: string | UserDto,
+    createdAt?: Date,
+    updatedBy?: string | UserDto,
+    updatedAt?: Date,
+    isActive?: boolean | true
 }
 

@@ -6,7 +6,8 @@ import { UserDto } from '../../../shared/models/UserDto';
 import { Router } from '@angular/router';
 import { email } from '@angular/forms/signals';
 import { JsonPipe } from '@angular/common';
-import { UserType } from '../../../shared/models/UserType.enum';
+import { UserType } from '../../../shared/models/enum';
+import { CommonMethods } from '../../../shared/services/common.methods';
 
 
 @Component({
@@ -16,14 +17,14 @@ import { UserType } from '../../../shared/models/UserType.enum';
   styleUrl: './login.css',
 })
 export class Login implements OnInit {
-
+common =new CommonMethods();
   fb = inject(FormBuilder)
   userService = inject(UserService)
   router = inject(Router)
   lsUser: any = {}
 
   ngOnInit(): void {
-    this.lsUser = this.userService.user() as UserDto;
+    this.lsUser = this.common.getfromLS('user') as UserDto;
   }
 
   userForm = this.fb.group({
@@ -35,15 +36,15 @@ export class Login implements OnInit {
       email: this.userForm.controls.email.value,
       password: this.userForm.controls.password.value
     }
-    console.log(user)
+   // console.log(user)
     const userresponse = this.userService.loginUser(user).subscribe({
       next: (response) => {
         alert('Login Successful');
 
         this.lsUser = response.user;
         delete this.lsUser.password
-        this.userService.update(this.lsUser)
-        localStorage.setItem('token', response.token)
+        this.common.updatToLS('user',this.lsUser)
+        this.common.updatToLS('token', response.token)
         if (this.lsUser.type === UserType.User) {
           this.router.navigate(['/home/notes']);
         }

@@ -2,9 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from "@angular/forms";
 import { UserService } from '../../../shared/services/userService';
-import { UserType } from '../../../shared/models/UserType.enum';
+import { UserType } from '../../../shared/models/enum';
 import { CommonModule } from '@angular/common';
 import { UserDto } from '../../../shared/models/UserDto';
+import { CommonMethods } from '../../../shared/services/common.methods';
 
 @Component({
   selector: 'app-profile',
@@ -17,10 +18,9 @@ export class Profile implements OnInit {
   router = inject(Router)
   fb = inject(FormBuilder)
   userService = inject(UserService)
-
   isEdit = false;
-
-  user: any = JSON.parse(localStorage.getItem('user') || '{}');
+common = new CommonMethods()
+  user: any = this.common.getfromLS('user') || '{}';
 
   isAdmin = this.user.type === UserType.Admin;
   lsUser: any = {}
@@ -89,7 +89,7 @@ export class Profile implements OnInit {
     else {
       this.userService.updateUser(this.user._id, this.profileForm.value).subscribe({
         next: (response) => {
-          this.userService.update(response.user)
+          this.common.updatToLS('user',response.user)
           this.user = response.user;
 
           this.profileForm.patchValue(this.user);

@@ -7,33 +7,26 @@ import { UserDto } from '../models/UserDto';
 import { User } from '../../app/user/user';
 import { Notes } from '../../app/notes/notes';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import{CommonMethods} from '../services/common.methods';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+common =new CommonMethods();
+  // private readonly localStorageIdentifier = 'user';
 
-  private readonly localStorageIdentifier = 'user';
+  // private _user = signal<any>(this.common.getfromLS(this.localStorageIdentifier));
 
-  private _user = signal<UserDto>(this.getuserFLS());
+  // readonly user = this._user.asReadonly();
 
-  readonly user = this._user.asReadonly();
-
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl+'/users';
   constructor(private http: HttpClient) { }
-
-  private setheader(): HttpHeaders {
-    const token = localStorage.getItem('token');
-    // console.log('token ' +token);
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return headers;
-  }
+  
+  
 
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/'users'`);
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   createUser(User: UserDto): Observable<any> {
@@ -43,48 +36,31 @@ export class UserService {
 
   updateUser(id: string, User: any): Observable<any> {
 
-    const headers = this.setheader()
-    return this.http.put<any>(`${this.apiUrl}/users/${id}`, User, { headers });
+    const headers = this.common.setheader()
+    return this.http.put<any>(`${this.apiUrl}/${id}`, User, { headers });
   }
 
   deleteUser(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/users/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 
   updatePassword(data: any): Observable<any> {
-    const headers = this.setheader()
-    return this.http.put<any>(`${this.apiUrl}/users/updatePassword`, data, { headers })
+    const headers = this.common.setheader()
+    return this.http.put<any>(`${this.apiUrl}/updatePassword`, data, { headers })
   }
 
   loginUser(User: any): Observable<any> {
     // console.log('user' + JSON.stringify(User))
-    //const headers = this.setheader();
-    return this.http.post<any>(`${this.apiUrl}/users/login`, User);
+    // const headers = this.setheader();
+    return this.http.post<any>(`${this.apiUrl}/login`, User);
   }
 
   comparePassword(cmpPassword: any): Observable<any> {
     //  console.log('user' + JSON.stringify(cmpPassword))
-    const headers = this.setheader();
-    return this.http.post<any>(`${this.apiUrl}/users/comparePassword`, cmpPassword, { headers });
+    const headers = this.common.setheader();
+    return this.http.post<any>(`${this.apiUrl}/comparePassword`, cmpPassword, { headers });
   }
 
   //local storage update value functions
-  update(inputuser: UserDto) {
-    this._user.set({ ...inputuser });
-
-    this.updateuserToLS()
-  }
-
-  getuserFLS() {
-    const usertring = localStorage.getItem(this.localStorageIdentifier)
-    return JSON.parse(usertring || '[]')
-
-  }
-  updateuserToLS() {
-    localStorage.setItem(
-      this.
-        localStorageIdentifier,
-      JSON.stringify(this.user())
-    )
-  }
+ 
 }

@@ -2,10 +2,11 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 import { SideBar } from '../../shared/components/side-bar/side-bar';
 import { UserDto } from '../../shared/models/UserDto';
-import { UserType } from '../../shared/models/UserType.enum';
+import { UserType } from '../../shared/models/enum';
 import { Notes } from "../notes/notes";
 import { NoteForm } from "../notes/note-form/note-form";
 import { NoteList } from "../notes/note-list/note-list";
+import { CommonMethods } from '../../shared/services/common.methods';
 @Component({
   selector: 'app-home',
   imports: [RouterOutlet, SideBar, Notes, NoteForm, NoteList],
@@ -17,12 +18,13 @@ export class Home implements OnInit {
   user: any = null;
   isAdmin = false;
   showMenu = false;
+  common =new CommonMethods()
   constructor(private router: Router) { }
   ngOnInit(): void {
-    const data = localStorage.getItem('user');
+    const data = this.common.getfromLS('user');
 
     if (data) {
-      this.user = JSON.parse(data);
+      this.user = data;
       if (this.user.type === UserType.Admin)
         this.isAdmin = true;
     }

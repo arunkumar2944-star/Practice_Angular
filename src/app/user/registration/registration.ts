@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, NgForm, Re
 import { UserService } from '../../../shared/services/userService';
 import { UserDto } from '../../../shared/models/UserDto';
 import { Router } from '@angular/router';
-import { UserType } from '../../../shared/models/UserType.enum';
+import { UserType } from '../../../shared/models/enum';
 import { passwordStrengthValidator, passwordMatchValidator } from '../password.validator';
 @Component({
   selector: 'app-registration',

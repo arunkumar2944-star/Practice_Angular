@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { SideBarItem } from './side-bar-item/side-bar-item';
-import { UserType } from '../../models/UserType.enum';
+import { UserType } from '../../models/enum';
 import { UserDto } from '../../models/UserDto';
 import { UserService } from '../../../shared/services/userService';
 import { Route } from '@angular/router';
+import { CommonMethods } from '../../services/common.methods';
 
 @Component({
   selector: 'app-side-bar',
@@ -13,10 +14,11 @@ import { Route } from '@angular/router';
 })
 export class SideBar implements OnInit {
 
+common =new CommonMethods();
 
   userService = inject(UserService);
 
-  userdata: UserDto = this.userService.getuserFLS();
+  userdata: UserDto = this.common.getfromLS('user');
 
   routes: any[] = [];
 

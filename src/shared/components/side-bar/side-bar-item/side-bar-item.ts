@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from "@angular/router";
-import { UserType } from '../../../models/UserType.enum';
+import { UserType } from '../../../models/enum';
 
 
 @Component({
