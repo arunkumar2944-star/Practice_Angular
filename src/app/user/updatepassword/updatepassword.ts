@@ -119,8 +119,8 @@ export class Updatepassword implements OnInit {
 
       },
       error: (error) => {
-        console.log('Password Incorect', error);
-        // alert('password Incorect');
+        // console.log('Password Incorect', error);
+        alert('password Incorect');
       }
     });
 
@@ -196,8 +196,8 @@ export class Updatepassword implements OnInit {
         }
 
       },error: (error) => {
-        console.log('Password Incorect', error);
-        // alert('password Incorect');
+        // console.log('Password Incorect', error);
+         alert('password Incorect');
       }
     });
 

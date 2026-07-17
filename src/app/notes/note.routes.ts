@@ -15,58 +15,60 @@ import { TrashedNotes } from './trashed-notes/trashed-notes';
 
 
 export const NOTE_ROUTES: Routes = [
-    {
+  {
+    path: '',
+    component: Notes,
+    children: [
+
+      {
         path: '',
-        component: Notes,
-        children: [
-            {
-                path: '',
-                redirectTo: 'dashboard',
-                pathMatch: 'full'
+        component: NotesDashboard
+      },
 
-            },
-            {
-                path:'',
-                component:NotesDashboard
+      {
+        path: 'noteform',
+        component: NoteForm
+      },
 
-            },
-            {
-                path:'noteform',
-                component:NoteForm
-            },
-            {
-                path:'notelist',
-                component:NoteList
-            },
-            {
-                path:'note',
-                component:NoteDetails
-            },
-            {
-                path:'archived',
-                component:ArchivedNotes
-            },
-            {
-                path:'completed',
-                component:CompletedNotes
-            },
-            {
-                path:'favorites',
-                component:FavoriteNotes
-            },
-            {
-                path:'note/?editid',
-                component:NoteEdit
-            },
-            {
-                path:'recent',
-                component:RecentNotes
-            },
-            {
-                path:'trash',
-                component:TrashedNotes
-            },
-        ]
-    }
+      {
+        path: 'notelist',
+        component: NoteList
+      },
 
-]
+      {
+        path: 'note/:id',
+        component: NoteDetails
+      },
+
+      {
+        path: 'edit/:id',
+        component: NoteEdit
+      },
+
+      {
+        path: 'archived',
+        component: ArchivedNotes
+      },
+
+      {
+        path: 'completed',
+        component: CompletedNotes
+      },
+
+      {
+        path: 'favorites',
+        component: FavoriteNotes
+      },
+
+      {
+        path: 'recent',
+        component: RecentNotes
+      },
+
+      {
+        path: 'trash',
+        component: TrashedNotes
+      }
+    ]
+  }
+];

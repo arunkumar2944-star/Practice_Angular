@@ -11,9 +11,9 @@ export enum Category{
 }
 
 export enum Priority{
-  Low,
-  Medium,
-  High
+  Low = 'Low',
+    Medium = 'Medium',
+    High = 'High'
 }
 
 export enum Status{

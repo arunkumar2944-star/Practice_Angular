@@ -10,7 +10,7 @@ export class CommonMethods {
         const headers = new HttpHeaders({
             Authorization: `Bearer ${token}`
         });
-        // console.log(headers)
+        console.log(headers)
 
         return headers;
     }

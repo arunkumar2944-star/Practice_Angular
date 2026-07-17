@@ -68,7 +68,7 @@ export class NoteForm implements OnInit {
       ]
     ],
 
-    attachments: this.fb.control<File[]>([], Validators.required),
+    attachments: this.fb.control<File[]>([]),
 
     visibility: ['', Validators.required],
 
@@ -186,7 +186,7 @@ export class NoteForm implements OnInit {
     this.noteService.createNote(note,this.selectedFiles).subscribe({
       next: (response) => {
 
-        if(response.status){
+        if(response.status==='Success'){
           alert(response.message)
           this.reset()
         }
@@ -220,6 +220,7 @@ export class NoteForm implements OnInit {
       isReminded: false,
       isActive: true
     });
+   this.selectedFiles = [];
     queueMicrotask(() => {
       this.noteTitle.nativeElement.focus();
     });

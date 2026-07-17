@@ -22,10 +22,10 @@ export class NoteService {
     private apiUrl = environment.apiUrl + '/notes';
     constructor(private http: HttpClient) { }
 
-
+//POST:Create note
     createNote(note: NoteDto, files: File[]): Observable<any> {
 
-        console.log('service method called')
+        // console.log('service method called')
         const formData = new FormData();
 
         formData.append('title', note.title);
@@ -73,13 +73,21 @@ export class NoteService {
         });
         const headers = this.common.setheader();
 
-        formData.forEach((value, key) => {
-            console.log(key, value);
-        });
+        // formData.forEach((value, key) => {
+        //     console.log(key, value);
+        // });
         return this.http.post(
             `${this.apiUrl}/add`,
             formData,
             { headers }
         );
+    }
+
+    //GET:Note list by userid
+
+    getNoteByUserID(): Observable<any> {
+        const headers = this.common.setheader();
+         console.log(`${this.apiUrl}/getByUserID`)
+        return this.http.get(`${this.apiUrl}/getByUserID`,{headers})
     }
 }

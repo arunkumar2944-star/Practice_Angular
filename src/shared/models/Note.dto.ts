@@ -3,8 +3,7 @@ import { Category, Priority, Status, Visibility } from "./enum"
 import { UserDto } from "./UserDto"
 
 export interface NoteDto {
-    // _id: number | null,
-    
+     _id?: string | null,
     title: string,
     details: string,
     tag:string,
