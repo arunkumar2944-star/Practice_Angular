@@ -1,0 +1,122 @@
+<div class="bg-white rounded-3xl shadow-sm p-6 border border-slate-200">
+
+    <!-- Header -->
+
+    <div class="flex justify-between items-center mb-6">
+
+        <div>
+
+            <h2 class="text-xl font-bold text-slate-800">
+
+                Upcoming Reminders
+
+            </h2>
+
+            <p class="text-sm text-gray-500">
+
+                Don't miss your tasks
+
+            </p>
+
+        </div>
+
+        <div
+            class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center">
+
+            <i class="fa-solid fa-bell text-xl"></i>
+
+        </div>
+
+    </div>
+
+    <!-- Empty State -->
+
+    @if (reminders.length === 0) {
+
+    <div class="text-center py-10">
+
+        <i class="fa-solid fa-calendar-xmark text-5xl text-gray-300"></i>
+
+        <p class="text-gray-500 mt-4">
+
+            No reminders found
+
+        </p>
+
+    </div>
+
+    }
+
+    <!-- Reminder List -->
+
+    @for (reminder of reminders; track reminder._id) {
+
+    <div
+        class="mb-4 p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 transition">
+
+        <div class="flex justify-between items-start">
+
+            <div>
+
+                <h3 class="font-semibold text-slate-800">
+
+                    {{ reminder.title }}
+
+                </h3>
+
+                <p class="text-sm text-gray-500 mt-1 line-clamp-2">
+
+                    {{ reminder.details }}
+
+                </p>
+
+            </div>
+
+            <!-- Priority badge -->
+
+            <span
+                class="px-3 py-1 rounded-full text-xs font-medium"
+
+                [ngClass]="{
+
+                  'bg-red-100 text-red-600':
+                      reminder.priority === priority.High,
+
+                  'bg-yellow-100 text-yellow-600':
+                      reminder.priority === priority.Medium,
+
+                  'bg-green-100 text-green-600':
+                      reminder.priority === priority.Low
+
+                }">
+
+                {{ reminder.priority }}
+
+            </span>
+
+        </div>
+
+        <div class="mt-4 flex justify-between items-center">
+
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+
+                <i class="fa-regular fa-clock"></i>
+
+                {{ reminder.reminderDate | date:'dd MMM yyyy, hh:mm a' }}
+
+            </div>
+
+            <span
+                class="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-100 text-indigo-600">
+
+                {{ getRemainingTime(reminder.reminderDate) }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

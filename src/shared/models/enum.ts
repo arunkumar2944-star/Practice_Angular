@@ -4,10 +4,10 @@ export enum UserType {
 }
 
 export enum Category{
-  Personal,
-  Work,
-  Study,
-  Meeting
+  Personal='Personal',
+  Work='Work',
+  Study='Study',
+  Meeting='Meeting'
 }
 
 export enum Priority{
@@ -17,14 +17,14 @@ export enum Priority{
 }
 
 export enum Status{
-  Draft,
-  Active,
-  Completed,
-  Archived
+  Draft='Draft',
+  Active='Active',
+  Completed='Completed',
+  Archived='Archived'
 }
 
 export enum Visibility{
-  Private,
-  Team,
-  Public
+  Private='Private',
+  Team='Team',
+  Public='Public'
 }

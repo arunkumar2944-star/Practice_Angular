@@ -1,228 +1,88 @@
-<div class="p-6 bg-gray-100 min-h-screen">
-    <!-- Summary Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-blue-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-gray-500">Total Notes</p>
-                    <h2 class="text-3xl font-bold mt-2">52</h2>
-                </div>
-                <span class="text-5xl">📝</span>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-yellow-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-gray-500">Favorites</p>
-                    <h2 class="text-3xl font-bold mt-2">12</h2>
-                </div>
-                <span class="text-5xl">⭐</span>
-            </div>
-        </div>
+    <app-stats-card
+        title="Total Notes"
+        [value]="totalNotes()"
+        icon="fa-solid fa-note-sticky"
+        bgColor="bg-indigo-300"
+        textColor="text-indigo-600"
+        [growth]="12"
+        description="from last week">
+    </app-stats-card>
 
-        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-green-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-gray-500">Today's Notes</p>
-                    <h2 class="text-3xl font-bold mt-2">5</h2>
-                </div>
-                <span class="text-5xl">📅</span>
-            </div>
-        </div>
+    <app-stats-card
+        title="Favorites"
+        [value]="favoriteNotes()"
+        icon="fa-solid fa-star"
+        bgColor="bg-yellow-100"
+        textColor="text-yellow-600"
+        [growth]="8"
+        description="bookmarked">
+    </app-stats-card>
 
-        <div class="bg-white rounded-xl shadow p-6 border-l-4 border-red-500">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-gray-500">Trash</p>
-                    <h2 class="text-3xl font-bold mt-2">3</h2>
-                </div>
-                <span class="text-5xl">🗑️</span>
-            </div>
-        </div>
+    <app-stats-card
+        title="Pinned"
+        [value]="pinnedNotes()"
+        icon="fa-solid fa-thumbtack"
+        bgColor="bg-emerald-100"
+        textColor="text-emerald-600"
+        [growth]="15"
+        description="important">
+    </app-stats-card>
 
-    </div>
+    <app-stats-card
+        title="Archived"
+        [value]="archivedNotes()"
+        icon="fa-solid fa-box-archive"
+        bgColor="bg-rose-100"
+        textColor="text-rose-600"
+        [growth]="2"
+        description="old notes">
+    </app-stats-card>
 
-    <!-- Main Content -->
-    <div class="grid lg:grid-cols-2 gap-6 mt-8">
+</div>
+<div class="bg-white rounded-3xl shadow-sm p-5">
 
-        <!-- Recent Notes -->
-        <div class="bg-white rounded-xl shadow p-6">
+    <div class="relative">
 
-            <!-- <h2 class="text-xl font-semibold mb-4">
-                Recent Notes
-            </h2> -->
-            <app-note-list></app-note-list>
-            <!-- <div class="grid gap-3">
-                    <div class="space-y-4">
+        <i class="fa-solid fa-magnifying-glass
+                  absolute left-4 top-1/2
+                  -translate-y-1/2
+                  text-gray-400">
+        </i>
 
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Angular Learning
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Components, Routing, Services, Signals...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 hours ago
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Angular Learning
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Components, Routing, Services, Signals...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 hours ago
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Meeting Notes
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Client discussion and project requirements.
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated Yesterday
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Shopping List
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Milk, Bread, Vegetables...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 days ago
-                            </p>
-                        </div> -->
-
-        </div>
-        <!-- <button class="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
-            ➕ Create Note
-          </button>
-
-          <button class="bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
-            ⭐ Favorites
-          </button>
-
-          <button class="bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600">
-            📂 Archived
-          </button>
-          <button class="bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700">
-            🕒 Recent
-          </button> -->
-
-        <!-- Right Panel -->
-        <div class="space-y-6">
-
-            <!-- Quick Actions -->
-            <div class="bg-white rounded-xl shadow p-6">
-
-                <h2 class="text-xl font-semibold mb-4">
-                    Today's Notes
-                </h2>
-
-                <div class="grid gap-3">
-                    <div class="space-y-4">
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Angular Learning
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Components, Routing, Services, Signals...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 hours ago
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Angular Learning
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Components, Routing, Services, Signals...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 hours ago
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Meeting Notes
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Client discussion and project requirements.
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated Yesterday
-                            </p>
-                        </div>
-
-                        <div class="border rounded-lg p-4 hover:bg-gray-50 cursor-pointer">
-                            <h3 class="font-semibold">
-                                Shopping List
-                            </h3>
-                            <p class="text-gray-500 mt-1">
-                                Milk, Bread, Vegetables...
-                            </p>
-                            <p class="text-sm text-gray-400 mt-2">
-                                Updated 2 days ago
-                            </p>
-                        </div>
-
-                    </div>
-                    <!-- <button class="bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700">
-            ➕ Create Note
-          </button>
-
-          <button class="bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
-            ⭐ Favorites
-          </button>
-
-          <button class="bg-orange-500 text-white py-3 rounded-lg hover:bg-orange-600">
-            📂 Archived
-          </button>
-          <button class="bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700">
-            🕒 Recent
-          </button> -->
-                </div>
-
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="bg-white rounded-xl shadow p-6">
-
-                <h2 class="text-xl font-semibold mb-4">
-                    Recent Activity
-                </h2>
-
-                <ul class="space-y-4 text-gray-600">
-
-                    <li>📝 Created <strong>Angular Notes</strong></li>
-
-                    <li>⭐ Added <strong>Meeting Notes</strong> to Favorites</li>
-
-                    <li>✏️ Updated <strong>Shopping List</strong></li>
-
-                    <li>🗑 Deleted <strong>Old Note</strong></li>
-
-                </ul>
-
-            </div>
-
-
-
-        </div>
+        <input
+            type="text"
+            placeholder="Search notes..."
+            (input)="onSearch($event)"
+            class="w-full pl-12 pr-4 py-3
+                   border border-gray-200
+                   rounded-2xl
+                   focus:outline-none
+                   focus:ring-2
+                   focus:ring-indigo-500">
 
     </div>
+
+</div>
+ <app-note-list
+     [notesList]="notesList()">
+ </app-note-list>
+<div class="mt-3 text-sm text-gray-500">
+
+    Found {{ filteredNotes().length }}
+
+    of {{ notesList().length }} notes
+
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
+
+    <app-reminder-widget
+        [reminders]="upcomingReminders()">
+    </app-reminder-widget>
+
+    <app-recent-activity
+        [activities]="recentActivities()">
+    </app-recent-activity>
+
+</div>

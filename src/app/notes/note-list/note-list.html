@@ -1,234 +1,324 @@
-<div class="min-h-screen bg-gray-100 p-6">
+<div class="min-h-screen bg-slate-100 flex">
 
-    <!-- Header -->
+    <!-- Sidebar
+    <aside class="w-72 bg-white shadow-lg border-r">
 
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+        <div class="p-6 border-b">
 
-        <div>
-
-            <h1 class="text-4xl font-bold text-gray-800">
+            <h1 class="text-3xl font-bold text-indigo-600">
                 My Notes
             </h1>
 
-            <p class="text-gray-500 mt-2">
-                Organize your thoughts and tasks.
+            <p class="text-sm text-gray-500 mt-1">
+                Personal Workspace
             </p>
 
         </div>
 
-        <button
-            (click)="noteAdd()"
-            class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
+        <nav class="mt-6">
 
-            + Add Note
+            <a class="flex items-center gap-3 px-6 py-4 bg-indigo-50 text-indigo-600 border-r-4 border-indigo-600 font-semibold">
 
-        </button>
+                🏠 Dashboard
 
-    </div>
+            </a>
 
-    <!-- Search -->
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-gray-100">
 
-    <div class="bg-white rounded-2xl shadow-md p-4 mb-8">
+                📝 All Notes
 
-        <div class="flex gap-4">
+            </a>
 
-            <input
-                type="text"
-                placeholder="Search notes..."
-                class="flex-1 border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500">
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-gray-100">
 
-            <select
-                class="border rounded-xl px-4 py-3">
+                ⭐ Favorites
 
-                <option>All Categories</option>
-                <option>Personal</option>
-                <option>Work</option>
-                <option>Study</option>
+            </a>
 
-            </select>
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-gray-100">
 
-        </div>
+                📌 Pinned
 
-    </div>
+            </a>
 
-    <!-- Notes Grid -->
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-gray-100">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                🗂 Archived
 
-        @for (note of notesList; track $index) {
+            </a>
 
-        <div
-            class="bg-white rounded-3xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden">
+            <a class="flex items-center gap-3 px-6 py-4 hover:bg-gray-100">
 
-            <!-- Priority bar -->
+                🗑 Trash
 
-            <div
-                class="h-2"
+            </a>
 
-                [ngClass]="{
-                    'bg-green-500': note.priority === priority.Low,
-                    'bg-yellow-500': note.priority === priority.Medium,
-                    'bg-red-500': note.priority === priority.High
-                }">
+        </nav>
+
+    </aside> -->
+
+    <!-- Main Content -->
+    <main class="flex-1">
+
+        <!-- Navbar -->
+        <!-- <header class="bg-white shadow-sm px-8 py-4 flex justify-between items-center">
+
+            <div>
+
+                <h2 class="text-3xl font-bold text-slate-800">
+                    Welcome, Priya 👋
+                </h2>
+
+                <p class="text-gray-500">
+                    Manage your notes efficiently.
+                </p>
 
             </div>
 
-            <div class="p-6">
+            <div class="flex items-center gap-5">
 
-                <!-- Title -->
+                <input
+                    type="text"
+                    placeholder="Search notes..."
+                    class="w-80 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
 
-                <div class="flex justify-between items-start">
+                <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center font-bold text-indigo-600">
+                    PA
+                </div>
 
-                    <h2 class="text-xl font-bold text-gray-800">
+            </div>
 
-                        {{ note.title }}
+        </header> -->
 
+        <div class="p-8">
+
+            <!-- Statistics -->
+
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+                <div class="bg-white p-6 rounded-3xl shadow">
+
+                    <p class="text-gray-500">Total Notes</p>
+
+                    <h2 class="text-4xl font-bold mt-3">
+                        {{ notesList().length }}
                     </h2>
 
-                    <div class="flex gap-2 text-xl">
+                </div>
 
-                        @if (note.isFavorite) {
+                <div class="bg-white p-6 rounded-3xl shadow">
 
-                        <span>⭐</span>
+                    <p class="text-gray-500">Favorites</p>
 
-                        }
+                    <h2 class="text-4xl font-bold mt-3 text-yellow-500">
+                        8
+                    </h2>
 
-                        @if (note.isPined) {
+                </div>
 
-                        <span>📌</span>
+                <div class="bg-white p-6 rounded-3xl shadow">
 
-                        }
+                    <p class="text-gray-500">Completed</p>
+
+                    <h2 class="text-4xl font-bold mt-3 text-green-500">
+                        12
+                    </h2>
+
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow">
+
+                    <p class="text-gray-500">Archived</p>
+
+                    <h2 class="text-4xl font-bold mt-3 text-red-500">
+                        3
+                    </h2>
+
+                </div>
+
+            </div> -->
+
+            <!-- Filters -->
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+
+                <div>
+
+                    <h1 class="text-4xl font-bold text-gray-800">
+                        My Notes
+                    </h1>
+
+                    <p class="text-gray-500 mt-2">
+                        Organize your thoughts and tasks.
+                    </p>
+
+                </div>
+
+                <button (click)="noteAdd()"
+                    class="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700 transition">
+
+                    + Add Note
+
+                </button>
+
+            </div>
+
+
+            <!-- Tabs -->
+
+            <div class="flex gap-4 mb-8 overflow-x-auto">
+
+
+
+                <button (click)="loadAllNotes()" [ngClass]="{
+            'bg-indigo-600 text-white': selectedTab() === 'all',
+            'bg-white shadow text-gray-700': selectedTab() !== 'all'
+        }" class="px-5 py-2 rounded-full transition-all duration-300">
+
+                    All
+
+                </button>
+
+                <button (click)="loadFavorite()" [ngClass]="{
+            'bg-yellow-500 text-white': selectedTab() === 'favorite',
+            'bg-white shadow text-gray-700': selectedTab() !== 'favorite'
+        }" class="px-5 py-2 rounded-full transition-all duration-300">
+
+                    Favorites
+
+                </button>
+
+                <button (click)="loadPinned()" [ngClass]="{
+            'bg-green-500 text-white': selectedTab() === 'pinned',
+            'bg-white shadow text-gray-700': selectedTab() !== 'pinned'
+        }" class="px-5 py-2 rounded-full transition-all duration-300">
+
+                    Pinned
+
+                </button>
+
+                <button (click)="loadReminded()" [ngClass]="{
+            'bg-red-500 text-white': selectedTab() === 'reminded',
+            'bg-white shadow text-gray-700': selectedTab() !== 'reminded'
+        }" class="px-5 py-2 rounded-full transition-all duration-300">
+
+                    Reminded
+
+                </button>
+            </div>
+
+            <!-- Notes Grid -->
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                @for (note of displayedNotes; track note._id) {
+
+                <div
+                    class="bg-white rounded-3xl p-6 shadow hover:shadow-2xl transition duration-300 hover:-translate-y-1">
+
+                    <div class="flex justify-between items-start">
+
+                        <div>
+
+                            <h3 class="text-2xl font-bold text-slate-800 line-clamp-1">
+
+                                {{ note.title }}
+
+                            </h3>
+
+                            <span
+                                class="inline-block mt-2 px-3 py-1 rounded-full bg-indigo-100 text-indigo-600 text-sm">
+
+                                {{ note.category }}
+
+                            </span>
+
+                        </div>
+
+                        <button class="text-2xl">
+
+                            ⋮
+
+                        </button>
+
+                    </div>
+
+                    <p class="text-gray-600 mt-5 line-clamp-3">
+
+                        {{ note.details }}
+
+                    </p>
+
+                    <div class="flex gap-2 flex-wrap mt-5">
+
+                        <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+
+                            #angular
+
+                        </span>
+
+                        <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+
+                            #node
+
+                        </span>
+
+                    </div>
+
+                    <div class="border-t mt-6 pt-4">
+
+                        <div class="text-sm text-gray-500">
+
+                            📅 {{ note.date | date:'dd MMM yyyy' }}
+
+                        </div>
+
+                        <div class="flex justify-between mt-5">
+
+                            <div class="flex gap-3 text-xl">
+
+                                ⭐ 📌
+
+                            </div>
+
+                            <div class="flex gap-3">
+
+                                <button class="bg-amber-500 text-white px-4 py-2 rounded-xl">
+
+                                    Edit
+
+                                </button>
+
+                                <button class="bg-red-500 text-white px-4 py-2 rounded-xl">
+
+                                    Delete
+
+                                </button>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                <!-- Category -->
-
-                <div class="mt-3">
-
-                    <span
-                        class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
-
-                        {{ note.category }}
-
-                    </span>
-
-                </div>
-
-                <!-- Description -->
-
-                <p class="text-gray-600 mt-4 line-clamp-4">
-
-                    {{ note.details }}
-
-                </p>
-
-                <!-- Tags -->
-
-                <div class="flex flex-wrap gap-2 mt-4">
-
-                    @for (tag of note.tag.split(','); track $index) {
-
-                    <span
-                        class="px-2 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm">
-
-                        #{{ tag.trim() }}
-
-                    </span>
-
-                    }
-
-                </div>
-
-                <!-- Attachments -->
-
-                @if (note.attachments?.length) {
-
-                <div class="mt-5">
-
-                    <img
-                        [src]="note.attachments[0]"
-                        class="w-full h-44 object-cover rounded-xl">
-
-                </div>
-
                 }
-
-                <!-- Dates -->
-
-                <div class="mt-5 text-sm text-gray-500 space-y-1">
-
-                    <p>
-
-                        📅 Created:
-                        {{ note.date | date:'dd MMM yyyy' }}
-
-                    </p>
-
-                    <p>
-
-                        ⏰ Reminder:
-                        {{ note.reminderDate | date:'dd MMM yyyy' }}
-
-                    </p>
-
-                </div>
-
-                <!-- Footer -->
-
-                <div class="flex justify-end gap-3 mt-6">
-
-                    <button
-                        (click)="editNote(note._id!)"
-                        class="px-4 py-2 bg-yellow-500 text-white rounded-xl hover:bg-yellow-600">
-
-                        ✏️ Edit
-
-                    </button>
-
-                    <button
-                        (click)="deleteNote(note._id!)"
-                        class="px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600">
-
-                        🗑️ Delete
-
-                    </button>
-
-                </div>
 
             </div>
 
         </div>
+        <div class="w-full flex-2 justify-center text-center">
+            <button (click)="showAll = !showAll"
+                class="w-2xs justify-between text-center px-4 py-2 bg-indigo-600 text-white rounded-lg">
 
-        }
+                {{ showAll ? 'Show Less' : 'View All' }}
 
-    </div>
-
-    <!-- Empty state -->
-
-    @if (notesCount  === 0) {
-
-    <div class="flex flex-col items-center justify-center py-20">
-
-        <div class="text-8xl">
-            📝
+            </button>
+            <br>
+            <br>
         </div>
 
-        <h2 class="text-2xl font-bold text-gray-700 mt-4">
-
-            No Notes Found
-
-        </h2>
-
-        <p class="text-gray-500 mt-2">
-
-            Click "Add Note" to create your first note.
-
-        </p>
-
-    </div>
-
-    }
+    </main>
 
 </div>
