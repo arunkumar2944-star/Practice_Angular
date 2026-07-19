@@ -6,14 +6,40 @@ import { UserDto } from '../../../shared/models/UserDto';
 import { NoteService } from '../../../shared/services/note-service';
 import { NoteDto } from '../../../shared/models/Note.dto';
 import { Category, Priority, Status, Visibility } from '../../../shared/models/enum';
+import { NgClass } from "@angular/common";
 @Component({
   selector: 'app-note-form',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './note-form.html',
   styleUrl: './note-form.css',
 })
 export class NoteForm implements OnInit {
 
+   categoryIcons: Record<Category, string> = {
+  [Category.Personal]: 'fa-solid fa-user text-blue-500',
+  [Category.Work]: 'fa-solid fa-briefcase text-orange-500',
+  [Category.Study]: 'fa-solid fa-book text-green-500',
+  [Category.Meeting]: 'fa-solid fa-users text-purple-500'
+};
+
+ priorityIcons: Record<Priority, string> = {
+  [Priority.Low]: 'fa-solid fa-arrow-down text-green-500',
+  [Priority.Medium]: 'fa-solid fa-minus text-yellow-500',
+  [Priority.High]: 'fa-solid fa-triangle-exclamation text-red-500'
+};
+
+ statusIcons: Record<Status, string> = {
+  [Status.Draft]: 'fa-solid fa-pen text-gray-500',
+  [Status.Active]: 'fa-solid fa-bolt text-green-500',
+  [Status.Completed]: 'fa-solid fa-circle-check text-red-500',
+  [Status.Archived]: 'fa-solid fa-box-archive text-pink-500'
+};
+
+ visibilityIcons: Record<Visibility, string> = {
+  [Visibility.Private]: 'fa-solid fa-lock text-indigo-500',
+  [Visibility.Team]: 'fa-solid fa-users text-cyan-500',
+  [Visibility.Public]: 'fa-solid fa-globe text-sky-500'
+};
 
   @ViewChild('noteTitle')
   noteTitle!: ElementRef<HTMLInputElement>;
@@ -24,6 +50,11 @@ export class NoteForm implements OnInit {
   selectedFiles: File[] = [];
   common = new CommonMethods()
   user: any = {};
+
+  // priorities = Object.values(Priority);
+  // categories = Object.values(Category);
+  // statuses = Object.values(Status);
+
 
   noteForm = this.fb.group({
     user: [null],
@@ -92,6 +123,15 @@ export class NoteForm implements OnInit {
   });
 
 
+
+  categories = Object.values(Category);
+
+  priorities = Object.values(Priority);
+
+  statuses = Object.values(Status);
+
+  visibilities = Object.values(Visibility);
+
   get title() {
     return this.noteForm.get('title');
   }
@@ -111,6 +151,8 @@ export class NoteForm implements OnInit {
   get attachments() {
     return this.noteForm.get('attachments');
   }
+
+
   onFileSelected(event: Event): void {
 
     const input = event.target as HTMLInputElement;
@@ -158,7 +200,7 @@ export class NoteForm implements OnInit {
 
   ngOnInit(): void {
     queueMicrotask(() => {
-      this.noteTitle.nativeElement.focus();
+      this.noteTitle?.nativeElement?.focus();
     });
   }
   saveNote() {
@@ -167,26 +209,26 @@ export class NoteForm implements OnInit {
 
     const note: NoteDto = {
       title: this.noteForm.controls.title.value ?? '',
-      details:this.noteForm.controls.details.value ?? '',
+      details: this.noteForm.controls.details.value ?? '',
       tag: this.noteForm.controls.Tag.value ?? '',
-      attachments: this.noteForm.controls.attachments.value??[],
-      category: (this.noteForm.controls.category.value??Category.Personal)as Category,
-      priority: (this.noteForm.controls.priority.value??Priority.Medium)as Priority,
-      status: (this.noteForm.controls.status.value??Status.Active)as Status,
-      date: this.noteForm.controls.date.value  ? new Date(this.noteForm.controls.date.value): new Date(),
-      dueDate: this.noteForm.controls.dueDate.value?new Date(this.noteForm.controls.dueDate.value):new Date(),
-      reminderDate: this.noteForm.controls.reminderDate.value?new Date(this.noteForm.controls.reminderDate.value):new Date(),
-      visibility: (this.noteForm.controls.visibility.value ??Visibility.Private) as Visibility,
-      isFavorite: this.noteForm.controls.isFavorite.value??false,
-      isPined: this.noteForm.controls.isPined.value??false,
-      isReminded: this.noteForm.controls.isReminded.value??false,
-      user:this.user??''
+      attachments: this.noteForm.controls.attachments.value ?? [],
+      category: (this.noteForm.controls.category.value ?? Category.Personal) as Category,
+      priority: (this.noteForm.controls.priority.value ?? Priority.Medium) as Priority,
+      status: (this.noteForm.controls.status.value ?? Status.Active) as Status,
+      date: this.noteForm.controls.date.value ? new Date(this.noteForm.controls.date.value) : new Date(),
+      dueDate: this.noteForm.controls.dueDate.value ? new Date(this.noteForm.controls.dueDate.value) : new Date(),
+      reminderDate: this.noteForm.controls.reminderDate.value ? new Date(this.noteForm.controls.reminderDate.value) : new Date(),
+      visibility: (this.noteForm.controls.visibility.value ?? Visibility.Private) as Visibility,
+      isFavorite: this.noteForm.controls.isFavorite.value ?? false,
+      isPined: this.noteForm.controls.isPined.value ?? false,
+      isReminded: this.noteForm.controls.isReminded.value ?? false,
+      user: this.user ?? ''
     }
 
-    this.noteService.createNote(note,this.selectedFiles).subscribe({
+    this.noteService.createNote(note, this.selectedFiles).subscribe({
       next: (response) => {
 
-        if(response.status==='Success'){
+        if (response.status === 'Success') {
           alert(response.message)
           this.reset()
         }
@@ -195,7 +237,8 @@ export class NoteForm implements OnInit {
       error: (error) => {
         console.error('Registration failed', error);
         alert('Registration Failed');
-      }});
+      }
+    });
     // console.log(this.noteForm.value)
 
     //this.reset()
@@ -220,7 +263,7 @@ export class NoteForm implements OnInit {
       isReminded: false,
       isActive: true
     });
-   this.selectedFiles = [];
+    this.selectedFiles = [];
     queueMicrotask(() => {
       this.noteTitle.nativeElement.focus();
     });

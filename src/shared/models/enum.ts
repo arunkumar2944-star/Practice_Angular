@@ -1,6 +1,6 @@
 export enum UserType {
-  Admin,
-  User,
+  Admin=0,
+  User=1,
 }
 
 export enum Category{
@@ -28,3 +28,7 @@ export enum Visibility{
   Team='Team',
   Public='Public'
 }
+
+
+
+

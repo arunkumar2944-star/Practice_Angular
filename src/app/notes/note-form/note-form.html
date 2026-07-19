@@ -1,14 +1,14 @@
-<div class="max-w-7xl mx-auto p-6">
+<div class="max-w-7xl mx-auto p-6 min-h-screen bg-gradient-to-r from-sky-50 via-white to-cyan-50 p-8">
 
     <!-- Header -->
 
     <div class="mb-8">
 
-        <h1 class="text-3xl font-bold text-gray-800">
+        <h1 class="text-3xl font-bold text-gray-800 underline text-center">
             📝 Create New Note
         </h1>
 
-        <p class="text-gray-500 mt-2">
+        <p class="text-gray-500 mt-2 text-center">
             Organize your ideas, reminders and tasks.
         </p>
         <div class="w-full justify-end text-end">
@@ -17,17 +17,17 @@
         </div>
     </div>
 
-    <form [formGroup]="noteForm" (ngSubmit)="saveNote()">
+    <form [formGroup]="noteForm" (ngSubmit)="saveNote()" >
 
-        <div class="bg-white shadow-xl rounded-2xl p-8 space-y-8">
+        <div class=" p-8 space-y-8 border">
 
             <!-- Basic Information -->
 
-            <div>
+            <div class="border rounded-3xl p-5">
 
-                <h2 class="text-xl font-semibold mb-5">
+                <h1 class="text-4xl font-extrabold text-center mb-5 underline">
                     Basic Information
-                </h2>
+                </h1>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -63,20 +63,51 @@
 
                     <!-- Category -->
 
-                    <div>
+                    <div class="border p-5">
 
                         <label class="block mb-2 font-medium">
                             Category
                         </label>
 
-                        <select formControlName="category" class="w-full border rounded-xl px-4 py-3">
+                        <!-- <select formControlName="category" class="w-full border rounded-xl px-4 py-3">
                             <option value="">Select One</option>
-                            <option value="Personal">👤 Personal</option>
-                            <option value="Work">💼 Work</option>
-                            <option value="Study">📚 Study</option>
-                            <option value="Meeting">🤝 Meeting</option>
+                            @for (category of categories; track category) {
 
-                        </select>
+                            <option [value]="category">
+                                {{ category }}
+                            </option>
+
+                            }
+
+                        </select> -->
+
+                        <div class="grid grid-cols-2 gap-4">
+
+                            @for (category of categories; track category) {
+
+                            <button type="button" (click)="noteForm.patchValue({ category: category })"
+                                class="relative p-4 border rounded-xl flex items-center gap-3" [ngClass]="{
+              'bg-indigo-600 text-white':
+                  noteForm.get('category')?.value === category
+            }">
+
+                                <i [class]="categoryIcons[category]"></i>
+
+                                <span>{{ category }}</span>
+
+                                @if (noteForm.get('category')?.value === category) {
+
+                                <i class="fa-solid fa-circle-check absolute top-5 right-2 text-green-500">
+                                </i>
+
+                                }
+
+                            </button>
+
+                            }
+
+                        </div>
+
                         @if (category?.invalid && category?.touched) {
                         <p class="text-red-500 text-sm mt-1">
                             Please select a category.
@@ -86,19 +117,52 @@
 
                     <!-- Priority -->
 
-                    <div>
+                    <div class="border p-5">
 
                         <label class="block mb-2 font-medium">
                             Priority
                         </label>
 
-                        <select formControlName="priority" class="w-full border rounded-xl px-4 py-3">
+                        <!-- <select formControlName="priority" class="w-full border rounded-xl px-4 py-3">
                             <option value="">Select One</option>
-                            <option value="Low">🟢 Low</option>
-                            <option value="Medium">🟡 Medium</option>
-                            <option value="High">🔴 High</option>
+                            @for (priority of priorities; track priority) {
 
-                        </select>
+                            <option [value]="priority">
+                                {{ priority }}
+                            </option>
+
+                            }
+
+
+                        </select> -->
+                        <div class="grid grid-cols-2 gap-4">
+
+                            @for (priority of priorities; track priority) {
+
+                            <button type="button" (click)="noteForm.patchValue({ priority: priority })"
+                                class="relative p-4 border rounded-xl flex items-center gap-3" [ngClass]="{
+              'bg-indigo-600 text-white':
+                  noteForm.get('priority')?.value === priority
+            }">
+
+                                <i [class]="priorityIcons[priority]"></i>
+
+                                <span>{{ priority }}</span>
+
+                                @if (noteForm.get('priority')?.value === priority) {
+
+                                <i class="fa-solid fa-circle-check absolute top-5 right-2 text-green-500">
+                                </i>
+
+                                }
+
+                            </button>
+
+                            }
+
+                        </div>
+
+
                         @if (priority?.invalid && priority?.touched) {
                         <p class="text-red-500 text-sm mt-1">
                             Please select a priority.
@@ -108,21 +172,50 @@
 
                     <!-- Status -->
 
-                    <div>
+                    <div class="border p-5">
 
                         <label class="block mb-2 font-medium">
                             Status
                         </label>
 
-                        <select formControlName="status" class="w-full border rounded-xl px-4 py-3">
+                        <!-- <select formControlName="status" class="w-full border rounded-xl px-4 py-3">
 
                             <option value="">Select One</option>
-                            <option value="Draft">📝 Draft</option>
-                            <option value="Active">✅ Active</option>
-                            <option value="Completed">✔️ Completed</option>
-                            <option value="Archived">📦 Archived</option>
+                            @for (status of statuses; track status) {
 
-                        </select>
+                            <option [value]="status">
+                                {{ status }}
+                            </option>
+                            }
+
+                        </select> -->
+
+                        <div class="grid grid-cols-2 gap-4">
+
+                            @for (status of statuses; track status) {
+
+                            <button type="button" (click)="noteForm.patchValue({ status: status })"
+                                class="relative p-4 border rounded-xl flex items-center gap-3" [ngClass]="{
+              'bg-indigo-600 text-white':
+                  noteForm.get('status')?.value === status
+            }">
+
+                                <i [class]="statusIcons[status]"></i>
+
+                                <span>{{ status }}</span>
+
+                                @if (noteForm.get('status')?.value === status) {
+
+                                <i class="fa-solid fa-circle-check absolute top-5 right-2 text-green-500">
+                                </i>
+
+                                }
+
+                            </button>
+
+                            }
+
+                        </div>
                         @if (status?.invalid && status?.touched) {
                         <p class="text-red-500 text-sm mt-1">
                             Please select a status.
@@ -138,7 +231,7 @@
 
             <div>
 
-                <h2 class="text-xl font-semibold mb-5">
+                <h2 class="text-xl font-extrabold text-center mb-5 underline">
                     Details
                 </h2>
 
@@ -163,7 +256,7 @@
 
             <!-- Tags & Visibility -->
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-3xl border p-3">
 
                 <div>
 
@@ -189,19 +282,51 @@
                     }
                 </div>
 
-                <div>
+                <div class="border p-3">
 
                     <label class="block mb-2 font-medium">
                         Visibility
                     </label>
 
-                    <select formControlName="visibility" class="w-full border rounded-xl px-4 py-3">
+                    <!-- <select formControlName="visibility" class="w-full border rounded-xl px-4 py-3">
                         <option value="">Select One</option>
-                        <option value="Private">🔒 Private</option>
-                        <option value="Team">👥 Team</option>
-                        <option value="Public">🌍 Public</option>
+                        @for (visibility of visibilities; track visibility) {
 
-                    </select>
+                        <option [value]="visibility">
+                            {{ visibility }}
+                        </option>
+
+                        }
+
+                    </select> -->
+                    <div class="grid grid-cols-2 gap-4">
+
+                        @for (visibility of visibilities; track visibility) {
+
+                        <button type="button" (click)="noteForm.patchValue({ visibility: visibility })"
+                            class="relative p-4 border rounded-xl flex items-center gap-3" [ngClass]="{
+              'bg-indigo-600 text-white':
+                  noteForm.get('visibility')?.value === visibility
+            }">
+
+                            <i [class]="visibilityIcons[visibility]"></i>
+
+                            <span>{{ visibility }}</span>
+
+                            @if (noteForm.get('visibility')?.value === visibility) {
+
+                            <i class="fa-solid fa-circle-check absolute top-5 right-2 text-green-500">
+                            </i>
+
+                            }
+
+                        </button>
+
+                        }
+
+                    </div>
+
+
                     @if (visibility?.invalid && visibility?.touched) {
 
                     <p class="text-red-500 text-sm mt-1">
@@ -215,9 +340,9 @@
 
             <!-- Dates -->
 
-            <div>
+            <div class=" rounded-3xl border p-5">
 
-                <h2 class="text-xl font-semibold mb-5">
+                <h2 class="text-xl font-extrabold text-center mb-5 underline">
                     Schedule
                 </h2>
 
@@ -301,9 +426,9 @@
 
             <!-- Options -->
 
-            <div>
+            <div class="rounded-3xl border p-5">
 
-                <h2 class="text-xl font-semibold mb-5">
+                <h2 class="text-xl font-extrabold text-center mb-5 underline">
                     Options
                 </h2>
 
@@ -347,10 +472,10 @@
 
             <!-- Buttons -->
 
-            <div class="flex justify-end gap-4 pt-6">
+            <div class="flex justify-center gap-4 pt-6">
 
                 <button (click)="reset()" type="button"
-                    class="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-gray-400 enabled:cursor-pointer enabled:hover:font-bold disabled:cursor-not-allowed">
+                    class="px-8 py-3 text-sk bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:bg-gray-400 enabled:cursor-pointer enabled:hover:font-bold disabled:cursor-not-allowed">
 
                     Cancel
 

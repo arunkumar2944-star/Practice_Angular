@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit,Input } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, Input } from '@angular/core';
 import { NoteList } from "../note-list/note-list";
 import { StatsCard } from './stats-card/stats-card';
 import { CommonModule, LowerCasePipe } from '@angular/common'
@@ -9,26 +9,68 @@ import { NoteDto } from '../../../shared/models/Note.dto';
 import { Status } from '../../../shared/models/enum';
 import { ActivityDto } from '../../../shared/models/activity.dto';
 import { RecentActivity } from './recent-activity/recent-activity';
+import { NoteGrid } from "./note-grid/note-grid";
 @Component({
   selector: 'app-notes-dashboard',
   imports: [CommonModule,
-    StatsCard, ReminderWidget, RecentActivity, NoteList],
+    StatsCard, ReminderWidget, RecentActivity, NoteGrid],
   templateUrl: './notes-dashboard.html',
   styleUrl: './notes-dashboard.css',
 })
 export class NotesDashboard implements OnInit {
+
   noteService = inject(NoteService)
+
   notesList = signal<NoteDto[]>([]);
   searchText = signal('');
   debouncedSearch = signal('');
+  stats=signal({
+
+     total: {
+        count: 0,
+        growth: 0
+    },
+    favorite: {
+        count: 0,
+        growth: 0
+    },
+    pinned: {
+        count: 0,
+        growth: 0
+    },
+    archived: {
+        count: 0,
+        growth: 0
+    }
+  })
 
 
   loadNotes() {
-    this.noteService.getNoteByUserID().subscribe({
+    this.noteService.getRecentNotesByUserID().subscribe({
       next: (response) => {
         //  this.zone.run(() => {
 
         this.notesList.set(response.notes)
+
+
+        // console.log('Notes length:', JSON.stringify(this.notesList()));
+
+        // this.cd.detectChanges();
+        //  });
+      }, error: (error) => {
+        console.error('Get list failed', error);
+        alert('Get list Failed');
+      }
+    });
+  }
+
+  loadStatsboarddata(){
+     this.noteService.getDasboardStatsforUser().subscribe({
+      next: (response) => {
+        //  this.zone.run(() => {
+
+        this.stats.set(response)
+
 
         // console.log('Notes length:', JSON.stringify(this.notesList()));
 
@@ -43,6 +85,7 @@ export class NotesDashboard implements OnInit {
 
   ngOnInit(): void {
     this.loadNotes()
+   this.loadStatsboarddata()
   }
   totalNotes = computed(() => this.notesList().length);
 
@@ -115,46 +158,67 @@ export class NotesDashboard implements OnInit {
 
   });
 
-private timeoutId: any;
+  private timeoutId: any;
 
-onSearch(event: Event): void {
+  onSearch(event: Event): void {
 
-  clearTimeout(this.timeoutId);
+    clearTimeout(this.timeoutId);
 
-  const value = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement).value;
 
-  this.timeoutId = setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
 
-    this.debouncedSearch.set(value);
+      this.debouncedSearch.set(value);
 
-  }, 300);
+    }, 300);
 
-}
-
-filteredNotes = computed(() => {
-
-  const search = this.debouncedSearch();
-
-  if (!search) {
-    return this.notesList();
   }
 
-  return this.notesList().filter(note =>
+  filteredNotes = computed(() => {
+
+  const search = this.debouncedSearch()
+    .toLowerCase()
+    .trim();
+
+  if (!search) {
+
+    return this.notesList();
+
+  }
+
+     return this.notesList().filter(note =>
 
     note.title.toLowerCase().includes(search) ||
 
     note.details.toLowerCase().includes(search) ||
 
-    note.category.valueOf().toLowerCase().includes(search) ||
+    note.category.toLowerCase().includes(search) ||
 
-    note.tag.toLowerCase().includes(search)||
-    note.priority.valueOf().toLowerCase().includes(search)||
-    note.status.valueOf().toLowerCase().includes(search)
+    note.tag?.toLowerCase().includes(search)||
+    note.status?.toLowerCase().includes(search)||
+    note.category?.toLowerCase().includes(search)||
+    note.priority?.toLowerCase().includes(search)||
+    note.visibility?.toLowerCase().includes(search)
+    // note.isFavorite.toString().includes(search)||
+    // note.isPined.toString().includes(search)||
+    // note.isReminded.toString().includes(search)||
+    // note.isActive?.toString().includes(search)
+
 
   );
 
 });
-  
+// recentNotes = computed(() => {
+
+//   return [...this.filteredNotes()]
+//     .sort(
+//       (a, b) =>
+//         new Date(b.createdAt!).getTime() -
+//         new Date(a.createdAt!).getTime()
+//     )
+//     .slice(0, 6);
+
+// });
 
 
 }

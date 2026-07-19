@@ -85,9 +85,21 @@ export class NoteService {
 
     //GET:Note list by userid
 
-    getNoteByUserID(): Observable<any> {
+    getNoteByUserID(page:number,limit:number,selectedTab:string): Observable<any> {
         const headers = this.common.setheader();
          console.log(`${this.apiUrl}/getByUserID`)
-        return this.http.get(`${this.apiUrl}/getByUserID`,{headers})
+        return this.http.get(`${this.apiUrl}/getByUserID/?page=${page}&limit=${limit}&stab=${selectedTab}`,{headers})
     }
+
+    getRecentNotesByUserID():Observable<any>{
+        const headers=this.common.setheader();
+        return this.http.get(`${this.apiUrl}/getRecentNotes`,{headers})
+    }
+
+getDasboardStatsforUser():Observable<any>{
+    const headers=this.common.setheader();
+    return this.http.get(`${this.apiUrl}/getListforStatsBoard`,{headers})
+}
+
+
 }

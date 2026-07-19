@@ -14,7 +14,7 @@ import { CommonMethods } from '../../services/common.methods';
 })
 export class SideBar implements OnInit {
 
-common =new CommonMethods();
+  common = new CommonMethods();
 
   userService = inject(UserService);
 
@@ -27,9 +27,11 @@ common =new CommonMethods();
     // console.log(
     //   'userdata ' + JSON.stringify(this.userService.getuserFLS())
     // );
+    // console.log(this.userdata.type)
+      console.log('in function call'+ this.userdata?.type)
 
-    if (this.userdata.type === UserType.User) {
-
+    if (Number(this.userdata.type) === UserType.User) {
+      console.log('user menu list :'+this.userdata.type)
       this.routes = [
         {
           title: 'Dashboard',
@@ -82,8 +84,8 @@ common =new CommonMethods();
         }
       ];
     }
-    else if (this.userdata.type === UserType.Admin) {
-
+    else if (Number(this.userdata.type) === UserType.Admin) {
+      console.log(this.userdata.type)
       this.routes = [
         {
           title: 'All Users',
@@ -162,5 +164,6 @@ common =new CommonMethods();
         }
       ];
     }
+    console.log(this.routes)
   }
 }
