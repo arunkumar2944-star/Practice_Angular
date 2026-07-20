@@ -45,7 +45,7 @@ common =new CommonMethods();
         delete this.lsUser.password
         this.common.updatToLS('user',this.lsUser)
         this.common.updatToLS('token', response.token)
-        if (this.lsUser.type === UserType.User) {
+        if (Number(this.lsUser.type) === UserType.User) {
           this.router.navigate(['/home/notes']);
         }
         else {

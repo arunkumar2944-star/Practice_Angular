@@ -21,14 +21,16 @@
 
             <div class="mt-4 flex items-center gap-2">
 
-                <span [class.text-green-600]="growth >= 0" [class.text-red-600]="growth < 0">
+                <span class="flex " [class.text-green-700]="growth >= 0" [class.text-red-700]="growth < 0">
 
-                    {{ growth }}%
-                    @if (growth >= 0) {
-                    <i class="fa-solid fa-arrow-trend-up text-green-600"></i>
-                    } @else {
-                    <i class="fa-solid fa-arrow-trend-down text-red-600"></i>
-                    }
+                    <p class=" flex">{{ growth }}%</p>
+                    <p class="">
+                        @if (growth >= 0) {
+                        <i class="fa-solid fa-arrow-trend-up text-green-600 ml-3"></i>
+                        } @else {
+                        <i class="fa-solid fa-arrow-trend-down text-red-600 ml-3"></i>
+                        }
+                    </p>
                 </span>
 
                 <span class="text-gray-400 text-sm">
@@ -44,7 +46,7 @@
         <!-- Right -->
 
         <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl transition-transform duration-300 group-hover:scale-110"
-            [class]="bgColor">
+            [class]="bgColor" [class]="textColor">
 
             <i [class]="icon"></i>
 

@@ -1,0 +1,49 @@
+<div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+
+                <div class="flex justify-between mb-6">
+
+                    <div>
+
+                        <h2 class="font-bold text-xl">
+                            Weekly Productivity
+                        </h2>
+
+                        <p class="text-sm text-gray-500">
+                            Last 7 days
+                        </p>
+
+                    </div>
+
+                    <i class="fa-solid fa-chart-column text-blue-500"></i>
+
+                </div>
+
+                <div class="space-y-5">
+
+                    @for(item of weekDays; track item){
+
+                    <div>
+
+                        <div class="flex justify-between mb-2">
+
+                            <span>{{ item}}</span>
+
+                            <span>{{ item }}</span>
+
+                        </div>
+
+                        <div class="h-3 bg-gray-100 rounded-full">
+
+                            <div class="h-3 rounded-full bg-blue-500">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    }
+
+                </div>
+
+            </div>

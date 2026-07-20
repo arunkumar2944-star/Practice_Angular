@@ -10,10 +10,12 @@ import { Status } from '../../../shared/models/enum';
 import { ActivityDto } from '../../../shared/models/activity.dto';
 import { RecentActivity } from './recent-activity/recent-activity';
 import { NoteGrid } from "./note-grid/note-grid";
+import { NoteCalendarComponent } from './note-calendar/note-calendar';
+import { WeeklyProductivity } from "./weekly-productivity/weekly-productivity";
 @Component({
   selector: 'app-notes-dashboard',
   imports: [CommonModule,
-    StatsCard, ReminderWidget, RecentActivity, NoteGrid],
+    StatsCard, ReminderWidget, RecentActivity, NoteGrid, NoteCalendarComponent, WeeklyProductivity],
   templateUrl: './notes-dashboard.html',
   styleUrl: './notes-dashboard.css',
 })
@@ -24,23 +26,52 @@ export class NotesDashboard implements OnInit {
   notesList = signal<NoteDto[]>([]);
   searchText = signal('');
   debouncedSearch = signal('');
-  stats=signal({
+  reminders: any[] = [];
 
-     total: {
-        count: 0,
-        growth: 0
+  activities: any[] = [];
+
+  //toggle component functionality
+  showCalendar = signal(false);
+
+  showWeeklyProductivity = signal(false);
+
+  showReminders = signal(false);
+
+  showActivities = signal(false);
+
+  toggleCalendar() {
+    this.showCalendar.update(value => !value);
+  }
+
+  toggleWeeklyProductivity() {
+    this.showWeeklyProductivity.update(value => !value);
+  }
+
+  toggleReminders() {
+    this.showReminders.update(value => !value);
+  }
+
+  toggleActivities() {
+    this.showActivities.update(value => !value);
+  }
+
+  stats = signal({
+
+    total: {
+      count: 0,
+      growth: 0
     },
     favorite: {
-        count: 0,
-        growth: 0
+      count: 0,
+      growth: 0
     },
     pinned: {
-        count: 0,
-        growth: 0
+      count: 0,
+      growth: 0
     },
     archived: {
-        count: 0,
-        growth: 0
+      count: 0,
+      growth: 0
     }
   })
 
@@ -64,8 +95,8 @@ export class NotesDashboard implements OnInit {
     });
   }
 
-  loadStatsboarddata(){
-     this.noteService.getDasboardStatsforUser().subscribe({
+  loadStatsboarddata() {
+    this.noteService.getDasboardStatsforUser().subscribe({
       next: (response) => {
         //  this.zone.run(() => {
 
@@ -85,27 +116,18 @@ export class NotesDashboard implements OnInit {
 
   ngOnInit(): void {
     this.loadNotes()
-   this.loadStatsboarddata()
+    this.loadStatsboarddata()
+    this.loadReminders();
   }
-  totalNotes = computed(() => this.notesList().length);
 
-  favoriteNotes = computed(() =>
-    this.notesList().filter(
-      note => note.isFavorite
-    ).length
-  );
+  loadReminders(): void {
+    // this.noteService.getUpcomingReminders().subscribe({
+    //   next: (response) => {
+    //     this.reminders = response.notes;
+    //   }
+    // });
+  }
 
-  pinnedNotes = computed(() =>
-    this.notesList().filter(
-      note => note.isPined
-    ).length
-  );
-
-  archivedNotes = computed(() =>
-    this.notesList().filter(
-      note => note.status === Status.Archived
-    ).length
-  );
 
 
   upcomingReminders = computed(() => {
@@ -176,49 +198,39 @@ export class NotesDashboard implements OnInit {
 
   filteredNotes = computed(() => {
 
-  const search = this.debouncedSearch()
-    .toLowerCase()
-    .trim();
+    const search = this.debouncedSearch()
+      .toLowerCase()
+      .trim();
 
-  if (!search) {
+    if (!search) {
 
-    return this.notesList();
+      return this.notesList();
 
-  }
+    }
 
-     return this.notesList().filter(note =>
+    return this.notesList().filter(note =>
 
-    note.title.toLowerCase().includes(search) ||
+      note.title.toLowerCase().includes(search) ||
 
-    note.details.toLowerCase().includes(search) ||
+      note.details.toLowerCase().includes(search) ||
 
-    note.category.toLowerCase().includes(search) ||
+      note.category.toLowerCase().includes(search) ||
 
-    note.tag?.toLowerCase().includes(search)||
-    note.status?.toLowerCase().includes(search)||
-    note.category?.toLowerCase().includes(search)||
-    note.priority?.toLowerCase().includes(search)||
-    note.visibility?.toLowerCase().includes(search)
-    // note.isFavorite.toString().includes(search)||
-    // note.isPined.toString().includes(search)||
-    // note.isReminded.toString().includes(search)||
-    // note.isActive?.toString().includes(search)
+      note.tag?.toLowerCase().includes(search) ||
+      note.status?.toLowerCase().includes(search) ||
+      note.category?.toLowerCase().includes(search) ||
+      note.priority?.toLowerCase().includes(search) ||
+      note.visibility?.toLowerCase().includes(search)
+      // note.isFavorite.toString().includes(search)||
+      // note.isPined.toString().includes(search)||
+      // note.isReminded.toString().includes(search)||
+      // note.isActive?.toString().includes(search)
 
 
-  );
+    );
 
-});
-// recentNotes = computed(() => {
-
-//   return [...this.filteredNotes()]
-//     .sort(
-//       (a, b) =>
-//         new Date(b.createdAt!).getTime() -
-//         new Date(a.createdAt!).getTime()
-//     )
-//     .slice(0, 6);
-
-// });
+  });
+  
 
 
 }
